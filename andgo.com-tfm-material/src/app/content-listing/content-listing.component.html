@@ -1,0 +1,33 @@
+<div class="" *ngIf="!contents">
+  <br/>
+  <mdl-progress indeterminate="true" style="width:100%;"></mdl-progress>
+  <br/>
+</div>
+
+<div class="andgo-card-container mdl-grid" *ngIf="contents">
+  <mdl-card class="mdl-cell mdl-cell--{{col}}-col mdl-cell--{{colTablet}}-col-tablet mdl-cell--{{colPhone}}-col-phone mdl-shadow--3dp" mdl-shadow="3" *ngFor="let content of contents">
+    <div class="mdl-card__media" [style.background-image]="content.imageUrlBg">
+      <!-- <img [src]="srv.imageUrl"> -->
+    </div>
+    <mdl-card-title>
+        <h4 mdl-card-title-text class="mdl-typography--text-center">{{content.name}}</h4>
+    </mdl-card-title>
+    <mdl-card-supporting-text class="mdl-typography--text-center">
+      <span class="mdl-typography--font-light mdl-typography--subhead">{{content.tagline}}</span>
+    </mdl-card-supporting-text>
+    <mdl-card-actions class="mdl-typography--text-center">
+        <button class="mdl-cell mdl-cell--6-col" mdl-button mdl-colored="accent" mdl-ripple [routerLink]="['/','destination', content.seo?.alias]" class="andgo-link"><strong>View More</strong><mdl-icon>chevron_right</mdl-icon></button>
+    </mdl-card-actions>
+  </mdl-card>
+</div>
+
+<div *ngIf="contents && contents.length == 0">
+  <div class="andgo-customized-section-text">
+    <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Whoops</div>
+    <p class="mdl-typography--font-light">
+      Seems we do not have anything at the moment, please check back tomorrow...
+      <br>
+      <!-- <a [routerLink]="['/layout/l1']" class="andgo-link mdl-typography--font-light"></a> -->
+    </p>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+  <div class="service-detail andgo-card-container mdl-grid">
+    <!-- Left block -->
+    <div class="mdl-cell mdl-cell--8-col">
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+        <div class="mdl-card__media">
+        </div>
+        <mdl-card-title>
+            <h3 mdl-card-title-text class="mdl-typography--text-center">Contact Us</h3>
+        </mdl-card-title>
+          <mdl-card-supporting-text class="">
+            <span class="mdl-typography--font-light mdl-typography--subhead">Complete the form below to contact us</span>
+            <form #formEnquiry="ngForm" id="formEnquiry" (ngSubmit)="formEnquiry.form.valid && submitMessage(enquiry)" ngNativeValidate class="mdl-grid">
+              <div class="mdl-cell--4-col">
+                <div class="mdl-cell--12-col">
+                  <mdl-textfield type="text" name="firstName" label="Enter your first name" [(ngModel)]="enquiry.firstName" floating-label required></mdl-textfield>
+                </div>
+                <div class="mdl-cell--12-col">
+                    <mdl-textfield type="text" name="lastName" label="Enter your surname" [(ngModel)]="enquiry.lastName" floating-label required></mdl-textfield>
+                </div>
+              </div>
+              <div class="mdl-cell--4-col">
+                <div class="mdl-cell--12-col">
+                    <mdl-textfield type="text" name="emailAddress" label="Enter your email address" [(ngModel)]="enquiry.emailAddress" floating-label required></mdl-textfield>
+                </div>
+                <div class="mdl-cell--12-col">
+                    <mdl-textfield type="text" name="contactNumber" label="Enter your your contact number" [(ngModel)]="enquiry.contactNumber" floating-label></mdl-textfield>
+                </div>
+              </div>
+              <div class="mdl-cell--4-col">
+                <div class="mdl-cell--12-col">
+                  <mdl-textfield type="text" name="comments" label="Any comments" [(ngModel)]="enquiry.comments" required floating-label></mdl-textfield>
+                </div>
+                <div class="mdl-cell--12-col mdl-typography--text-center">
+                  <button mdl-button (click)="formEnquiry.ngSubmit.emit()" form="formEnquiry" mdl-button-type="raised" mdl-colored="primary" mdl-ripple [disabled]="!formEnquiry.form.valid" style="padding: 5px 16px;height: auto;width: 100%;">{{status}}</button>
+                </div>
+              </div>
+              
+            </form>
+          </mdl-card-supporting-text>
+      </mdl-card>
+
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+        <div class="mdl-card__media">
+        </div>
+        <mdl-card-title>
+            <h3 mdl-card-title-text class="mdl-typography--text-center">Map</h3>
+        </mdl-card-title>
+          <mdl-card-supporting-text class="">
+            <sebm-google-map [latitude]="-33.818402" [longitude]="18.495551" [styles]="styles" [zoom]="9" style="height:500px">
+              <sebm-google-map-marker [latitude]="-33.818402" [longitude]="18.495551">
+                <sebm-google-map-info-window [disableAutoPan]="false">
+                  <strong>andgo.com</strong><br/>
+                  <span>Unit 2B4 The Avenues, Village Walk, Parklands,Western Cape, 7441</span>
+                </sebm-google-map-info-window>
+              </sebm-google-map-marker>
+            </sebm-google-map>
+          </mdl-card-supporting-text>
+      </mdl-card>
+
+      
+    </div>
+    <!-- Right blocks -->
+    <div class="mdl-cell mdl-cell--4-col">
+        <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+            <mdl-card-title>
+                <h4 mdl-card-title-text>Need andgo.com Help?</h4>
+            </mdl-card-title>
+            <mdl-card-supporting-text class="">
+              <span class="">We would be more than happy to help you. Our team are at your service to help you.</span>
+              <br>
+              <br>
+              <div class="mdl-grid">
+                <span class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"><mdl-icon>call</mdl-icon> <strong class="mdl-color-text--primary">021 556 5884</strong></span>
+                <span class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"><mdl-icon>email</mdl-icon> <strong class="mdl-color-text--primary"><a href="mailto:info@andgo.com">info@andgo.com</a></strong></span>
+              </div>
+            </mdl-card-supporting-text>
+          </mdl-card>
+          
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" mdl-shadow="3">
+        <mdl-card-title>
+            <h4 mdl-card-title-text>Operating Hours</h4>
+        </mdl-card-title>
+        <mdl-card-supporting-text class="mdl-grid">
+          <span class="mdl-cell mdl-cell--6-col">Monday to Thursday</span><span class="mdl-cell mdl-cell--6-col">08h30 to 17h00</span>
+          <br>
+          <span class="mdl-cell mdl-cell--6-col">Friday</span><span class="mdl-cell mdl-cell--6-col">08h30 to 16h30</span>
+          <br/>
+          <span class="mdl-cell mdl-cell--12-col">Closed on Saturdays, Sundays & Public Holidays</span>
+        </mdl-card-supporting-text>
+      </mdl-card>
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" mdl-shadow="3">
+        <mdl-card-title>
+            <h4 mdl-card-title-text>Postal Address</h4>
+        </mdl-card-title>
+        <mdl-card-supporting-text class="mdl-grid">
+          <span class="mdl-cell mdl-cell--12-col">Postnet Suite 199, Private Bag X3</span>
+          <br/>
+          <span class="mdl-cell mdl-cell--12-col">Bloubergrant</span>
+          <br/>
+          <span class="mdl-cell mdl-cell--12-col">7443</span>
+        </mdl-card-supporting-text>
+      </mdl-card>
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone" mdl-shadow="3">
+        <mdl-card-title>
+            <h4 mdl-card-title-text>Bank Details (First National Bank)</h4>
+        </mdl-card-title>
+        <mdl-card-supporting-text class="mdl-grid">
+          <span class="mdl-cell mdl-cell--6-col">Account Name</span><span class="mdl-cell mdl-cell--6-col">Web Travel Brands SA (PTY) LTD</span>
+          <br>
+          <span class="mdl-cell mdl-cell--6-col">Account Type</span><span class="mdl-cell mdl-cell--6-col">FNB Current Account</span>
+          <br>
+          <span class="mdl-cell mdl-cell--6-col">Account Number</span><span class="mdl-cell mdl-cell--6-col">62374372052</span>
+          <br>
+          <span class="mdl-cell mdl-cell--6-col">Branch Code</span><span class="mdl-cell mdl-cell--6-col">203809</span>
+        </mdl-card-supporting-text>
+      </mdl-card>
+
+      
+    </div>
+  </div>

@@ -1,0 +1,84 @@
+<div class="" *ngIf="!content">
+  <mdl-progress indeterminate="true" style="width:100%;"></mdl-progress>
+</div>
+
+
+  <div class="service-detail andgo-card-container mdl-grid" *ngIf="content">
+    <!-- Left block -->
+    <div class="mdl-cell mdl-cell--8-col">
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+        <!-- <div class="mdl-card__media">
+          <p-galleria *ngIf="serviceImages" [images]="serviceImages" panelWidth="100%" panelHeight="35vh" [showFilmstrip]="true" [showCaption]="false"></p-galleria>
+        </div> -->
+        <p-carousel [value]="content.images">
+          <ng-template let-img pTemplate="item">
+              <div class="ui-grid ui-grid-responsive">
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-12"><img src="{{img.path}}" width="60"></div>
+                  </div>
+              </div>
+          </ng-template>
+        </p-carousel>
+        <mdl-card-title>
+            <h3 class="mdl-typography--text-center">{{content.name}}</h3>
+        </mdl-card-title>
+        <mdl-card-supporting-text *ngIf="content.rawContent">
+          <div [innerHTML]="content.rawContentSafe"></div>
+        </mdl-card-supporting-text>
+        <mdl-tabs mdl-ripple mdl-tab-active-index="0" *ngIf="type == 'destination'">
+            <mdl-tab-panel *ngIf="content">
+              <mdl-tab-panel-title>
+                <h6 [mdl-badge]="content.services">Packages</h6>
+              </mdl-tab-panel-title>
+              <mdl-tab-panel-content>
+                <app-service-list #appServiceList (count)="content.services=$event" [query]="content.name" [col]="4" [col-tablet]="6" [col-phone]="12"></app-service-list>
+              </mdl-tab-panel-content>
+            </mdl-tab-panel>
+          </mdl-tabs>
+      </mdl-card>
+    </div>
+    <!-- Right blocks -->
+    <div class="mdl-cell mdl-cell--4-col">
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+        <mdl-card-title>
+            <h4 mdl-card-title-text>Need andgo.com Help?</h4>
+        </mdl-card-title>
+        <mdl-card-supporting-text class="">
+          <span class="">We would be more than happy to help you. Our team are at your service to help you.</span>
+          <br>
+          <br>
+          <div class="mdl-grid">
+            <span class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"><mdl-icon>call</mdl-icon> <strong class="mdl-color-text--primary">021 556 5884</strong></span>
+            <span class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone"><mdl-icon>email</mdl-icon> <strong class="mdl-color-text--primary"><a href="mailto:info@andgo.com">info@andgo.com</a></strong></span>
+          </div>
+        </mdl-card-supporting-text>
+      </mdl-card>
+
+      <mdl-card class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3">
+        <mdl-card-title>
+            <h4 mdl-card-title-text>Why Book with us?</h4>
+        </mdl-card-title>
+        <mdl-card-supporting-text class="">
+          <span class="">
+            <mdl-icon>card_giftcard</mdl-icon> <strong class="mdl-color-text--primary">Best Deals</strong><br/>
+            We pride ourselves in negotiating the best deals for you. Don’t pay more elsewhere!
+          </span>
+          <hr>
+          <span class="">
+            <mdl-icon>done_all</mdl-icon> <strong class="mdl-color-text--primary">Large Selection</strong><br/>
+            Our selection of hand-picked properties ensures a wide range of options to suit most budgets.
+          </span>
+          <hr>
+          <span class="">
+            <mdl-icon>headset_mic</mdl-icon> <strong class="mdl-color-text--primary">Expert Advice</strong><br/>
+            Our experienced Holiday Consultants will ensure that your holidays surpass all expectations.
+          </span>
+          <hr>
+          <span class="">
+            <mdl-icon>gamepad</mdl-icon> <strong class="mdl-color-text--primary">Tailor-made</strong><br/>
+            All of our packages are flexible and can be arranged to suit your specific requirements.
+          </span>
+        </mdl-card-supporting-text>
+      </mdl-card>
+    </div>
+  </div>

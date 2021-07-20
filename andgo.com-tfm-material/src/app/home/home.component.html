@@ -1,0 +1,72 @@
+<a name="top"></a>
+    <div class="home andgo-be-together-section mdl-typography--text-center">
+      <p-carousel *ngIf="bannerImages" [value]="bannerImages" numVisible="1" autoplayInterval="5000" [responsive]="true">
+        <ng-template let-item pTemplate="item">
+            <div class="carousel-image" [style.background-image]="item.image.imageUrlBg">
+              <div class="carousel-caption-skew">
+                <h4 class="" style="margin: 0px;">{{item.service.name}} <small>{{item.service.destination}}</small></h4>
+                <span class="mdl-color-text--primary carousel-price"><strong>from R{{item.service.rateFrom.sellPrice | number:'.2-2'}}</strong></span>
+                <button class="carousel-button andgo-link" mdl-button mdl-colored="accent" mdl-ripple [routerLink]="['/','package', item.service.seo?.alias]"><strong>View More</strong><mdl-icon>chevron_right</mdl-icon></button>
+              </div>
+            </div>
+        </ng-template>
+      </p-carousel>
+
+      <a href="#services">
+        <button class="andgo-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+          <i class="material-icons">expand_more</i>
+        </button>
+      </a>
+    </div>
+
+    <a id="services" name="services"></a>
+    <mdl-tabs mdl-ripple mdl-tab-active-index="0" class="home" (mdl-tab-active-changed)="scrollTo($event)">
+      <mdl-tab-panel *ngFor="let section of sections | slice: 0:6">
+        <mdl-tab-panel-title>
+          <h6 [mdl-badge]="section.count ? section.count : ''">{{section.value}}</h6>
+        </mdl-tab-panel-title>
+        <mdl-tab-panel-content>
+          <app-service-list (count)="section.count=$event" [query]="section.query" [promo]="section.promo"></app-service-list>
+        </mdl-tab-panel-content>
+      </mdl-tab-panel>
+    </mdl-tabs>
+
+    <div class="andgo-wear-section">
+      <div class="andgo-wear-band">
+        <div class="andgo-wear-band-text">
+          <div class="mdl-typography--display-2 mdl-typography--font-thin">Subscribe to our newsletter</div>
+          <p class="mdl-typography--headline mdl-typography--font-thin">
+            We send out 1-2 newsletters per week with brand new offers!
+          </p>
+          <form class="subscribe-form" (ngSubmit)="addSubscriber()" ngNativeValidate>
+              <mdl-textfield class="mdl-cell mdl-cell--6-col" type="email" required placeholder="Enter your email address" [(ngModel)]="subscriber.emailAddress" name="subscriber.emailAddress"></mdl-textfield>
+              
+              <button type="submit" class="mdl-cell mdl-cell--4-col" mdl-button mdl-button-type="raised" mdl-colored="accent" mdl-ripple><strong>{{subscribeStatus}}</strong><mdl-icon>chevron_right</mdl-icon></button>
+          </form>
+          <p>
+            <a class="mdl-typography--font-regular andgo-alt-link">
+              * We will never give out your email address and you can unsubscribe at any time with 1-click in each newsletter.
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="andgo-more-section" *ngIf="testimonials && testimonials.length > 0">
+      <div class="andgo-section-title mdl-typography--display-1-color-contrast">Testimonials</div>
+      <div class="andgo-card-container mdl-grid">
+        <mdl-card class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone" mdl-shadow="3" *ngFor="let t of testimonials | slice:0:3">
+          <div class="mdl-card__media">
+            <img *ngIf="t.imageUrl" src="t.imageUrl" alt="Testimonial {{t.name}}">
+          </div>
+          <mdl-card-title>
+              <h4 mdl-card-title-text>{{t.tagline}}</h4>
+          </mdl-card-title>
+          <mdl-card-supporting-text>
+            <span class="mdl-typography--font-light mdl-typography--subhead" [innerHTML]="t.rawContentShort"></span>
+          </mdl-card-supporting-text>
+          <mdl-card-actions style="margin-bottom: 0px;">
+              <button mdl-button mdl-colored mdl-ripple [routerLink]="['/layout/l1']" class="andgo-link">{{t.name}} <mdl-icon>person_pin</mdl-icon></button>
+          </mdl-card-actions>
+        </mdl-card>
+      </div>
+    </div>

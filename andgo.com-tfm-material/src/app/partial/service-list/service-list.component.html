@@ -1,0 +1,63 @@
+<div class="" *ngIf="!services">
+  <br/>
+  <mdl-progress indeterminate="true" style="width:100%;"></mdl-progress>
+  <br/>
+</div>
+
+<div class="andgo-card-container mdl-grid" *ngIf="services">
+<div style="width: 100%;">
+   <select  #price (change)="OnFilterchange($event.target.value,rating.value,1)" style="float:right;padding: 6px;margin-right: 8px;"  [(ngModel)]="FilterPrice">
+             <option value="0"> Any Price Range </option>
+          <option value="10000">  R0 to R10,000 </option>
+          <option  value="15000"> R10,000 to R15,000 </option>
+          <option  value="20000"> R15,000 to R20,000 </option>
+          <option  value="25000"> R20,000 to R25,000 </option>
+          <option  value="30000"> R25,000 to R30,000 </option>
+          <option  value="35000"> R30,000 to R35,000 </option>
+          <option  value="40000"> R40,000+ </option>
+        </select>
+
+        <select  #rating (change)="OnFilterchange($event.target.value,price.value,2)" style="float:right;padding: 6px;margin-right: 14px;" [(ngModel)]="FilterRating"> 
+          <option value="0"> Any Star Rating </option>
+          <option value="1"> 1 Star </option>
+          <option  value="2"> 2 Star</option>
+          <option  value="3"> 3 Star</option>
+          <option  value="4"> 4 Star</option>
+          <option  value="5"> 5 Star</option>
+        </select>
+        <button mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple (click)="ResetFilter()" style="float:right;height: 30px;margin-right: 22px;line-height: 5px;"><strong>Reset</strong></button>
+
+        
+</div>
+     
+  <mdl-card style="cursor:pointer" [scrollTo]="'#top'" class="mdl-cell mdl-cell--{{col}}-col mdl-cell--{{colTablet}}-col-tablet mdl-cell--{{colPhone}}-col-phone mdl-shadow--3dp" mdl-shadow="3" *ngFor="let srv of services" (click)="navigateToService(['/','package', srv.seo?.alias])">
+    <div class="mdl-card__media" [style.background-image]="srv.imageUrlBg">
+      <!-- <img [src]="srv.imageUrl"> -->
+    </div>
+    <mdl-card-title>
+        <h4 mdl-card-title-text class="mdl-typography--text-center">{{srv.name}}</h4>
+    </mdl-card-title>
+    <mdl-card-supporting-text class="mdl-typography--text-center" style="padding: 0px 16px 10px;min-height: auto;">
+      <span class="">{{srv.destination}}</span>
+    </mdl-card-supporting-text>
+    <rating class="mdl-typography--text-center" [ngModel]="srv.grading" [max]="5" [titles]="['One Star', 'Two Star', 'Three Star', 'Four Star', 'Five Star']" [readonly]="true"></rating>
+    <mdl-card-supporting-text class="mdl-typography--text-center">
+      <span class="">{{srv.tagline}}</span>
+    </mdl-card-supporting-text>
+    <mdl-card-actions class="mdl-typography--text-center">
+        <span class="mdl-color-text--primary mdl-cell mdl-cell--6-col" *ngIf="srv.rateFrom"><strong>From R{{srv.rateFrom.sellPrice | number:'.2-2'}}</strong></span>
+        <button class="mdl-cell mdl-cell--6-col" mdl-button mdl-colored="accent" mdl-ripple [routerLink]="['/','package', srv.seo?.alias]" class="andgo-link"><strong>Details</strong><mdl-icon>chevron_right</mdl-icon></button>
+    </mdl-card-actions>
+  </mdl-card>
+</div>
+
+<div *ngIf="services && services.length == 0">
+  <div class="andgo-customized-section-text">
+    <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Whoops</div>
+    <p class="mdl-typography--font-light">
+      Seems we do not have anything at the moment, please check back tomorrow...
+      <br>
+      <a [routerLink]="['/layout/l1']" class="andgo-link mdl-typography--font-light"></a>
+    </p>
+  </div>
+</div>

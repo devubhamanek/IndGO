@@ -1,0 +1,899 @@
+﻿@{
+    ViewBag.Title = @ViewBag.Detail.Name + " | andgo.com";
+}
+
+<style>
+    pre {
+    background-color: #ffffff; 
+    border: 0px solid #ccc; 
+      font-size: 1.0833em;
+  line-height: 1.6666;
+  margin-bottom: 15px;
+  margin: 0 0 10px;
+  font: 125% "Lato", Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: #838383;
+    }
+</style>
+<div id="slideshow" style="display:none">
+    <div class="fullwidthbanner-container">
+        <div class="revolution-slider" style="height: 0; overflow: hidden;">
+            <ul>
+                <!-- SLIDE  -->
+                <!-- Slide1 -->
+                <li data-transition="zoomin" data-slotamount="7" data-masterspeed="1500">
+                    <!-- MAIN IMAGE -->
+                    <img src="images/slides/slide1.jpg" alt="African Safari">
+                </li>
+
+                <!-- Slide2 -->
+                <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1500">
+                    <!-- MAIN IMAGE -->
+                    <img src="images/slides/slide2.jpg" alt="Zanzibar Beach">
+                </li>
+
+                <!-- Slide3 -->
+                @*<li data-transition="slidedown" data-slotamount="7" data-masterspeed="1500">
+                        <img src="http://placehold.it/2080x646" alt="">
+                    </li>*@
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="content">
+    <div class="section container">
+        <h2>@ViewBag.Detail.Name</h2>
+        <div id="main" class="col-md-9">
+            <div class="tab-container style1" id="cruise-main-content">
+                <div class="tab-content">
+                    <div id="photos-tab" class="tab-pane fade in active">
+                        <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+
+                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                <ul class="slides" style="width: 2600%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(-8700px, 0px, 0px); transform: translate3d(-8700px, 0px, 0px);">
+                                    <li class="clone" aria-hidden="true" style="width: 870px; float: left; display: block;"><img src="http://icore.infinityweb.co.za/Content/Images/@ViewBag.Detail.Images[0].Name" alt="" draggable="false"></li>
+                                </ul>
+                            </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li><li><a class="">5</a></li><li><a class="">6</a></li><li><a class="">7</a></li><li><a class="">8</a></li><li><a class="">9</a></li><li><a class="flex-active">10</a></li><li><a class="">11</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                        </div>
+                        <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+
+                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                <ul class="slides" style="width: 2200%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(-90px, 0px, 0px); transform: translate3d(-90px, 0px, 0px);">
+                                    <li class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="http://icore.infinityweb.co.za/Content/Images/@ViewBag.Detail.Images[0].Name" alt=" " draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                </ul>
+                            </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                        </div>
+                    </div>
+                    <div id="calendar-tab" class="tab-pane fade">
+                        <label>SELECT MONTH</label>
+                        <div class="col-sm-6 col-md-4 no-float no-padding">
+                            <div class="selector">
+                                <select class="full-width" id="select-month">
+                                    <option value="2014-6">June 2014</option>
+                                    <option value="2014-7">July 2014</option>
+                                    <option value="2014-8">August 2014</option>
+                                    <option value="2014-9">September 2014</option>
+                                    <option value="2014-10">October 2014</option>
+                                    <option value="2014-11">November 2014</option>
+                                    <option value="2014-12">December 2014</option>
+                                </select><span class="custom-select full-width">June 2014</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="calendar"><table><thead><tr><td>sunday</td><td>monday</td><td>tuesday</td><td>wednesday</td><td>thursday</td><td>friday</td><td>saturday</td></tr></thead><tbody><tr><td class="prev-month"></td><td class=" date-passed"><span>1</span></td><td class=" date-passed"><span>2</span></td><td class=" date-passed"><span>3</span></td><td class=" date-passed"><span>4</span></td><td class=" date-passed"><span>5</span></td><td class=" date-passed"><span>6</span></td></tr><tr><td class=" date-passed"><span>7</span></td><td class=" date-passed"><span>8</span></td><td class=" date-passed"><span>9</span></td><td class=" date-passed"><span>10</span></td><td class=" date-passed"><span>11</span></td><td class=" date-passed"><span>12</span></td><td class=" date-passed"><span>13</span></td></tr><tr><td class=" date-passed"><span>14</span></td><td class=" today available"><a href="#">15<span class="price-text">$170</span></a></td><td class=" available"><a href="#">16<span class="price-text">$170</span></a></td><td class=" unavailable"><span>17</span></td><td class=" unavailable"><span>18</span></td><td class=" unavailable"><span>19</span></td><td class=" unavailable"><span>20</span></td></tr><tr><td class=" unavailable"><span>21</span></td><td class=" unavailable"><span>22</span></td><td class=" unavailable"><span>23</span></td><td class=" unavailable"><span>24</span></td><td class=" unavailable"><span>25</span></td><td class=" unavailable"><span>26</span></td><td class=" unavailable"><span>27</span></td></tr><tr><td class=" unavailable"><span>28</span></td><td class=" unavailable"><span>29</span></td><td class=" unavailable"><span>30</span></td></tr></tbody></table></div>
+                                <div class="calendar-legend">
+                                    <label class="available">available</label>
+                                    <label class="unavailable">unavailable</label>
+                                    <label class="past">past</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="description">
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (ViewBag.Detail != null)
+            {
+                <div id="cruise-features" class="tab-container" style="display:none">
+                    <ul class="tabs">
+                        <li class="active"><a href="#cruise-description" data-toggle="tab">Description</a></li>
+                        <li><a href="#cruise-availability" data-toggle="tab">Availability</a></li>
+                        <li><a href="#cruise-amenities" data-toggle="tab">Amenities</a></li>
+                        <li><a href="#cruise-food-dinning" data-toggle="tab">Food &amp; Dinning</a></li>
+                        <li><a href="#cruise-reviews" data-toggle="tab">Reviews</a></li>
+                        <li><a href="#cruise-write-review" data-toggle="tab">Write a Review</a></li>
+                    </ul>
+                    <div class="tab-content" style="border-spacing: 0px;">
+                        <div class="tab-pane fade in active" id="cruise-description" style="padding:0px">
+                            <div class="intro table-wrapper full-width hidden-table-sms">
+                                <div class="col-sm-5 col-lg-4 features table-cell">
+                                    @*<ul>
+
+                                            <li><label>Cruise name:</label>
+                                            @if (ViewBag.Detail != null)
+                                            { @ViewBag.Detail.Name}
+                                            </li>
+                                            <li><label>Cruise length:</label>@if (ViewBag.Detail != null)
+                                                                             {@ViewBag.Detail.Nights}</li>
+                                            <li><label>Ship name:</label>Imagination</li>
+                                            <li><label>Interior room:</label>$279</li>
+                                            <li><label>Oceanview:</label>$269</li>
+                                            <li><label>Balcony:</label>Not Offered</li>
+                                            <li><label>Suite:</label>@if (ViewBag.Detail != null){@ViewBag.Detail.Price}</li>
+                                            <li><label>Save per room:</label>20%</li>
+                                        </ul>*@
+                                    <ul>
+                                        <li><label>hotel type:</label>@ViewBag.Detail.Stars star/@ViewBag.Detail.Rating rating </li>
+                                        <li><label>Extra people:</label>No Charge</li>
+                                        <li><label>Minimum Stay:</label>@ViewBag.Detail.Nights nights</li>
+                                        <li><label>Security Deposit:</label>$279</li>
+                                        <li><label>Country:</label>France</li>
+                                        <li><label>City:</label>Paris</li>
+                                        <li><label>Neighborhood:</label>République</li>
+                                        <li><label>Cancellation:</label>strict</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-7 col-lg-8 table-cell testimonials">
+                                    <div class="testimonial style1">
+
+                                        <div class="testimonial-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides " style="width: 600%; -webkit-transition-duration: 0s; transition-duration: 0s; -webkit-transform: translate3d(0px, 0px, 0px); transform: translate3d(0px, 0px, 0px);">
+                                                <li class="testimonial-active-slide" style="width: 473px; float: left; display: block; height: 173px;">
+                                                    <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                    <div class="author clearfix">
+                                                        <a href="#"><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author1.png" alt="" width="74" height="74" draggable="false"></a>
+                                                        <h5 class="name">Jessica Brown<small>guest</small></h5>
+                                                    </div>
+                                                </li>
+                                                <li style="width: 473px; float: left; display: block; height: 173px;">
+                                                    <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                    <div class="author clearfix">
+                                                        <a href="#"><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author1.png" alt="" width="74" height="74" draggable="false"></a>
+                                                        <h5 class="name">Lisa Kimberly<small>guest</small></h5>
+                                                    </div>
+                                                </li>
+                                                <li style="width: 473px; float: left; display: block; height: 173px;">
+                                                    <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
+                                                    <div class="author clearfix">
+                                                        <a href="#"><img src="http://www.soaptheme.net/html/travelo/images/shortcodes/author1.png" alt="" width="74" height="74" draggable="false"></a>
+                                                        <h5 class="name">Jessica Brown<small>guest</small></h5>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div><ol class="testimonial-control-nav testimonial-control-paging"><li><a class="testimonial-active">1</a></li><li><a>2</a></li><li><a>3</a></li></ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="cruise-availability">
+                            <div class="border-box travelo-box clearfix">
+                                <h4 class="title col-xs-12">Select a Stateroom Category</h4>
+                                <form class="update-search-form">
+                                    <div class="form-group col-xs-6 col-md-3">
+                                        <label>Date</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" class="input-text full-width hasDatepicker" placeholder="mon, Jan 26, 2014" id="dp1434370584834"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-6 col-md-3">
+                                        <label>Room category</label>
+                                        <div class="selector">
+                                            <select>
+                                                <option value="">Suite</option>
+                                            </select><span class="custom-select">Suite</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-8 col-md-4">
+                                        <label>Price</label>
+                                        <div class="selector">
+                                            <select>
+                                                <option value="">Up to $300</option>
+                                            </select><span class="custom-select">Up to $300</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-4 col-md-2">
+                                        <label>&nbsp;</label>
+                                        <button type="submit" class="icon-check full-width">PROCEED</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <h2>Rooms Available</h2>
+                            <div class="room-list listing-style3 hotel">
+                                <article class="box">
+                                    <figure class="col-sm-4 col-md-3">
+                                        <a class="hover-effect popup-gallery" href="ajax/cruise-slideshow-popup.html"><img width="230" height="161" src="images/cruise/room/1.png" alt=""></a>
+                                    </figure>
+                                    <div class="details col-xs-12 col-sm-8 col-md-9">
+                                        <div>
+                                            <div>
+                                                <div class="box-title">
+                                                    <h4 class="title">Grand Suite</h4>
+                                                    <dl class="description">
+                                                        <dt>Deck:</dt>
+                                                        <dd>Upper</dd>
+                                                        <dt>Size:</dt>
+                                                        <dd>330 sq ft Balcony: 70 sq ft.</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="amenities">
+                                                    <i class="soap-icon-wifi circle"></i>
+                                                    <i class="soap-icon-fitnessfacility circle"></i>
+                                                    <i class="soap-icon-fork circle"></i>
+                                                    <i class="soap-icon-television circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="price-section">
+                                                <span class="price"><small>PER/NIGHT</small>$121</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p>
+                                            <div class="action-section">
+                                                <a href="cruise-booking.html" class="button btn-small full-width text-center">BOOK NOW</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="box">
+                                    <figure class="col-sm-4 col-md-3">
+                                        <a class="hover-effect popup-gallery" href="ajax/cruise-slideshow-popup.html"><img width="230" height="161" src="images/cruise/room/2.png" alt=""></a>
+                                    </figure>
+                                    <div class="details col-xs-12 col-sm-8 col-md-9">
+                                        <div>
+                                            <div>
+                                                <div class="box-title">
+                                                    <h4 class="title">Junior Suite</h4>
+                                                    <dl class="description">
+                                                        <dt>Deck:</dt>
+                                                        <dd>Verandah</dd>
+                                                        <dt>Size:</dt>
+                                                        <dd>220 sq ft Balcony: 30 sq ft.</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="amenities">
+                                                    <i class="soap-icon-wifi circle"></i>
+                                                    <i class="soap-icon-fitnessfacility circle"></i>
+                                                    <i class="soap-icon-fork circle"></i>
+                                                    <i class="soap-icon-television circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="price-section">
+                                                <span class="price"><small>PER/NIGHT</small>$325</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p>
+                                            <div class="action-section">
+                                                <a href="cruise-booking.html" class="button btn-small full-width text-center">BOOK NOW</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="box">
+                                    <figure class="col-sm-4 col-md-3">
+                                        <a class="hover-effect popup-gallery" href="ajax/cruise-slideshow-popup.html"><img width="230" height="161" src="images/cruise/room/3.png" alt=""></a>
+                                    </figure>
+                                    <div class="details col-xs-12 col-sm-8 col-md-9">
+                                        <div>
+                                            <div>
+                                                <div class="box-title">
+                                                    <h4 class="title">Junior Suite (obstructed view)</h4>
+                                                    <dl class="description">
+                                                        <dt>Deck:</dt>
+                                                        <dd>Upper</dd>
+                                                        <dt>Size:</dt>
+                                                        <dd>220 sq ft Balcony: 30 sq ft.</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="amenities">
+                                                    <i class="soap-icon-wifi circle"></i>
+                                                    <i class="soap-icon-fitnessfacility circle"></i>
+                                                    <i class="soap-icon-fork circle"></i>
+                                                    <i class="soap-icon-television circle"></i>
+                                                </div>
+                                            </div>
+                                            <div class="price-section">
+                                                <span class="price"><small>PER/NIGHT</small>$248</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p>
+                                            <div class="action-section">
+                                                <a href="cruise-booking.html" class="button btn-small full-width text-center">BOOK NOW</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            <a href="#" class="load-more full-width button btn-large fourty-space">LOAD MORE ROOMS</a>
+
+                        </div>
+                        <div class="tab-pane fade" id="cruise-amenities">
+                            <h2>Amenities Style 01</h2>
+
+                            <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                            <ul class="amenities clearfix style1">
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-wifi"></i>WI_FI</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-swimming"></i>swimming pool</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-television"></i>television</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-coffee"></i>coffee</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-aircon"></i>air conditioning</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-fitnessfacility"></i>fitness facility</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-fridge"></i>fridge</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-winebar"></i>wine bar</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-smoking"></i>smoking allowed</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-entertainment"></i>entertainment</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-securevault"></i>secure vault</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-pickanddrop"></i>pick and drop</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-phone"></i>room service</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-pets"></i>pets allowed</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-playplace"></i>play place</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-breakfast"></i>complimentary breakfast</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-parking"></i>Free parking</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-conference"></i>conference room</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-fireplace"></i>fire place</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-handicapaccessiable"></i>Handicap Accessible</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-doorman"></i>Doorman</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-tub"></i>Hot Tub</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-elevator"></i>Elevator in Building</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style1"><i class="soap-icon-star"></i>Suitable for Events</div>
+                                </li>
+                            </ul>
+                            <br>
+
+                            <h2>Amenities Style 02</h2>
+                            <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                            <ul class="amenities clearfix style2">
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>WI_FI</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>swimming pool</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-television circle"></i>television</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-coffee circle"></i>coffee</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-aircon circle"></i>air conditioning</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>fitness facility</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-fridge circle"></i>fridge</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>wine bar</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>smoking allowed</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-entertainment circle"></i>entertainment</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-securevault circle"></i>secure vault</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-pickanddrop circle"></i>pick and drop</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-phone circle"></i>room service</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-pets circle"></i>pets allowed</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-playplace circle"></i>play place</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>complimentary breakfast</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Free parking</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-conference circle"></i>conference room</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-fireplace circle"></i>fire place</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Handicap Accessible</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-tub circle"></i>Hot Tub</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Elevator in Building</div>
+                                </li>
+                                <li class="col-md-4 col-sm-6">
+                                    <div class="icon-box style2"><i class="soap-icon-star circle"></i>Suitable for Events</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="cruise-food-dinning">
+                            <div class="box">
+                                <h2>Food and Dinning on Ship</h2>
+                                <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                            </div>
+                            <div class="food-dinning-list image-box style2">
+                                <div class="box">
+                                    <figure>
+                                        <a href="#"><img src="images/cruise/food-dinning/1.png" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="review-score">
+                                            <div class="five-stars-container" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="4 stars"><div class="five-stars" style="width: 80%;"></div></div>
+                                            <span class="review">27 reviews</span>
+                                        </div>
+                                        <div class="box-title">
+                                            <h4 class="title">Sushi Bar</h4>
+                                            <dl>
+                                                <dt>Seating Times:</dt>
+                                                <dd>Open nightly prior to dinner.</dd>
+                                            </dl>
+                                        </div>
+                                        <hr class="hidden-xs">
+                                        <p>Watch the sushi chef prepare fresh Nigiri salmon, California rolls, Nigiri Toro, and other delicious Japanese delicacies for your enjoyment. Then grab some chopsticks and sample these colorful creations.</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <figure>
+                                        <a href="#"><img src="images/cruise/food-dinning/2.png" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="review-score">
+                                            <div class="five-stars-container" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="4 stars"><div class="five-stars" style="width: 80%;"></div></div>
+                                            <span class="review">27 reviews</span>
+                                        </div>
+                                        <div class="box-title">
+                                            <h4 class="title">My Time Dining</h4>
+                                            <dl>
+                                                <dt>Seating Times:</dt>
+                                                <dd>5:45 - 9:30 PM.</dd>
+                                            </dl>
+                                        </div>
+                                        <hr class="hidden-xs">
+                                        <p>Watch the sushi chef prepare fresh Nigiri salmon, California rolls, Nigiri Toro, and other delicious Japanese delicacies for your enjoyment. Then grab some chopsticks and sample these colorful creations.</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <figure>
+                                        <a href="#"><img src="images/cruise/food-dinning/3.png" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="review-score">
+                                            <div class="five-stars-container" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="4 stars"><div class="five-stars" style="width: 80%;"></div></div>
+                                            <span class="review">27 reviews</span>
+                                        </div>
+                                        <div class="box-title">
+                                            <h4 class="title">Carnivale &amp; Mardi Gras Dining Rooms</h4>
+                                            <dl>
+                                                <dt>Seating Times:</dt>
+                                                <dd>Lunch: Noon to 1:30 PM; Dinner: 5:45-6:15 PM</dd>
+                                            </dl>
+                                        </div>
+                                        <hr class="hidden-xs">
+                                        <p>Watch the sushi chef prepare fresh Nigiri salmon, California rolls, Nigiri Toro, and other delicious Japanese delicacies for your enjoyment. Then grab some chopsticks and sample these colorful creations.</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <figure>
+                                        <a href="#"><img src="images/cruise/food-dinning/4.png" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="review-score">
+                                            <div class="five-stars-container" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="4 stars"><div class="five-stars" style="width: 80%;"></div></div>
+                                            <span class="review">27 reviews</span>
+                                        </div>
+                                        <div class="box-title">
+                                            <h4 class="title">Brasserie Bar &amp; Grill</h4>
+                                            <dl>
+                                                <dt>Seating Times:</dt>
+                                                <dd>7 AM to midnight.</dd>
+                                            </dl>
+                                        </div>
+                                        <hr class="hidden-xs">
+                                        <p>Watch the sushi chef prepare fresh Nigiri salmon, California rolls, Nigiri Toro, and other delicious Japanese delicacies for your enjoyment. Then grab some chopsticks and sample these colorful creations.</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <figure>
+                                        <a href="#"><img src="images/cruise/food-dinning/5.png" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <div class="review-score">
+                                            <div class="five-stars-container" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="3 stars"><div class="five-stars" style="width: 60%;"></div></div>
+                                            <span class="review">27 reviews</span>
+                                        </div>
+                                        <div class="box-title">
+                                            <h4 class="title">Room Service</h4>
+                                            <dl>
+                                                <dt>Seating Times:</dt>
+                                                <dd>Available 24 hours.</dd>
+                                            </dl>
+                                        </div>
+                                        <hr class="hidden-xs">
+                                        <p>Watch the sushi chef prepare fresh Nigiri salmon, California rolls, Nigiri Toro, and other delicious Japanese delicacies for your enjoyment. Then grab some chopsticks and sample these colorful creations.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="button btn-large full-width uppercase">Load More Food &amp; Dinning Listings</a>
+                        </div>
+                        <div class="tab-pane fade" id="cruise-reviews">
+                            <div class="intro table-wrapper full-width hidden-table-sms">
+                                <div class="rating table-cell col-sm-4">
+                                    <span class="score">3.9/5.0</span>
+                                    <div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div>
+                                    <a href="#" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
+                                </div>
+                                <div class="table-cell col-sm-8">
+                                    <div class="detailed-rating">
+                                        <ul class="clearfix">
+                                            <li class="col-md-6"><div class="each-rating"><label>Ship Quality</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>Ship Staff Quality</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>Dining/Food</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>Activities</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>rooms Quality</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>Play areas</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                            <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container"><div class="five-stars" style="width: 78%;"></div></div></div></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guest-reviews">
+                                <h2>Guest Reviews</h2>
+                                <div class="guest-review table-wrapper">
+                                    <div class="col-xs-3 col-md-2 author table-cell">
+                                        <a href="#"><img src="images/shortcodes/team/jessica.png" alt="" width="270" height="263"></a>
+                                        <p class="name">Jessica Brown</p>
+                                        <p class="date">NOV, 12, 2013</p>
+                                    </div>
+                                    <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                        <div class="comment-header clearfix">
+                                            <h4 class="comment-title">Pretty good for a weekend</h4>
+                                            <div class="review-score">
+                                                <div class="five-stars-container"><div class="five-stars" style="width: 80%;"></div></div>
+                                                <span class="score">4.0/5.0</span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="guest-review table-wrapper">
+                                    <div class="col-xs-3 col-md-2 author table-cell">
+                                        <a href="#"><img src="images/shortcodes/team/david.png" alt="" width="270" height="263"></a>
+                                        <p class="name">David Jhon</p>
+                                        <p class="date">NOV, 12, 2013</p>
+                                    </div>
+                                    <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                        <div class="comment-header clearfix">
+                                            <h4 class="comment-title">First time cruise - FANTASTIC</h4>
+                                            <div class="review-score">
+                                                <div class="five-stars-container"><div class="five-stars" style="width: 64%;"></div></div>
+                                                <span class="score">3.2/5.0</span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="guest-review table-wrapper">
+                                    <div class="col-xs-3 col-md-2 author table-cell">
+                                        <a href="#"><img src="images/shortcodes/team/kyle.png" alt="" width="270" height="263"></a>
+                                        <p class="name">Kyle Martin</p>
+                                        <p class="date">NOV, 12, 2013</p>
+                                    </div>
+                                    <div class="col-xs-9 col-md-10 table-cell comment-container">
+                                        <div class="comment-header clearfix">
+                                            <h4 class="comment-title">5-day Carnival Inspiration out of Tampa</h4>
+                                            <div class="review-score">
+                                                <div class="five-stars-container"><div class="five-stars" style="width: 76%;"></div></div>
+                                                <span class="score">3.8/5.0</span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stand dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="button full-width btn-large">LOAD MORE REVIEWS</a>
+                        </div>
+                        <div class="tab-pane fade" id="cruise-write-review">
+                            <div class="main-rating table-wrapper full-width hidden-table-sms intro">
+                                <article class="image-box box cruise listing-style1 photo table-cell col-sm-4">
+                                    <figure>
+                                        <a class="hover-effect" title="" href="#"><img width="270" height="160" alt="" src="images/cruise/7.png"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Carnival Cruise Lines<small>Carnival inspiration</small></h4>
+                                        <div class="feedback">
+                                            <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="4 stars"><span class="five-stars" style="width: 80%;"></span></div>
+                                            <span class="review">270 reviews</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <div class="table-cell col-sm-8">
+                                    <div class="overall-rating">
+                                        <h4>Your overall Rating of this property</h4>
+                                        <div class="star-rating clearfix">
+                                            <div class="five-stars-container"><div class="five-stars" style="width: 80%;"></div></div>
+                                            <span class="status">VERY GOOD</span>
+                                        </div>
+                                        <div class="detailed-rating">
+                                            <ul class="clearfix">
+                                                <li class="col-md-6"><div class="each-rating"><label>Ship Quality</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Ship Staff Quality</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Dining/Food</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Activities</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>rooms Quality</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Play areas</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>Cleanliness</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                                <li class="col-md-6"><div class="each-rating"><label>fitness facility</label><div class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-original-stars="4" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div></div></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="review-form">
+                                <div class="form-group col-md-5 no-float no-padding">
+                                    <h4 class="title">Title of your review</h4>
+                                    <input type="text" name="review-title" class="input-text full-width" value="" placeholder="enter a review title">
+                                </div>
+                                <div class="form-group">
+                                    <h4 class="title">Your review</h4>
+                                    <textarea class="input-text full-width" placeholder="enter your review (minimum 200 characters)" rows="5"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <h4 class="title">What sort of Trip was this?</h4>
+                                    <ul class="sort-trip clearfix">
+                                        <li><a href="#"><i class="soap-icon-businessbag circle"></i></a><span>Business</span></li>
+                                        <li><a href="#"><i class="soap-icon-couples circle"></i></a><span>Couples</span></li>
+                                        <li><a href="#"><i class="soap-icon-family circle"></i></a><span>Family</span></li>
+                                        <li><a href="#"><i class="soap-icon-friends circle"></i></a><span>Friends</span></li>
+                                        <li><a href="#"><i class="soap-icon-user circle"></i></a><span>Solo</span></li>
+                                    </ul>
+                                </div>
+                                <div class="form-group col-md-5 no-float no-padding">
+                                    <h4 class="title">When did you travel?</h4>
+                                    <div class="selector">
+                                        <select class="full-width">
+                                            <option value="2014-6">June 2014</option>
+                                            <option value="2014-7">July 2014</option>
+                                            <option value="2014-8">August 2014</option>
+                                            <option value="2014-9">September 2014</option>
+                                            <option value="2014-10">October 2014</option>
+                                            <option value="2014-11">November 2014</option>
+                                            <option value="2014-12">December 2014</option>
+                                        </select><span class="custom-select full-width">June 2014</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4 class="title">Add a tip to help travelers choose a good ship</h4>
+                                    <textarea class="input-text full-width" rows="3" placeholder="write something here"></textarea>
+                                </div>
+                                <div class="form-group col-md-5 no-float no-padding">
+                                    <h4 class="title">Do you have photos to share? <small>(Optional)</small> </h4>
+                                    <div class="fileinput full-width" style="line-height: 34px;">
+                                        <input type="file" class="input-text" data-placeholder="select image/s"><input type="text" class="custom-fileinput input-text" placeholder="select image/s">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4 class="title">Share with friends <small>(Optional)</small></h4>
+                                    <p>Share your review with your friends on different social media networks.</p>
+                                    <ul class="social-icons icon-circle clearfix">
+                                        <li class="twitter"><a title="" href="#" data-toggle="tooltip" data-original-title="Twitter"><i class="soap-icon-twitter"></i></a></li>
+                                        <li class="facebook"><a title="" href="#" data-toggle="tooltip" data-original-title="Facebook"><i class="soap-icon-facebook"></i></a></li>
+                                        <li class="googleplus"><a title="" href="#" data-toggle="tooltip" data-original-title="GooglePlus"><i class="soap-icon-googleplus"></i></a></li>
+                                        <li class="pinterest"><a title="" href="#" data-toggle="tooltip" data-original-title="Pinterest"><i class="soap-icon-pinterest"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="form-group col-md-5 no-float no-padding no-margin">
+                                    <button type="submit" class="btn-large full-width">SUBMIT REVIEW</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+            
+            <div class="long-description travelo-box box-full" >
+                <h2>About @ViewBag.Detail.Name </h2>
+                <p>
+                    @if (ViewBag.Detail != null)
+                    {
+                        <pre>@ViewBag.Detail.Description</pre>
+                    }
+                </p>
+            </div>
+
+        </div>
+        <div class="sidebar col-md-3">
+            <article class="detailed-logo">
+                <figure>
+                    <img width="114" height="85" src="http://icore.infinityweb.co.za/Content/Images/@ViewBag.Detail.Images[0].Name" alt="">
+                </figure>
+                <div class="details">
+                    <h2 class="box-title">
+                        @if (ViewBag.Detail != null)
+                        {@ViewBag.Detail.Name}
+                </h2>
+                <span class="price clearfix">
+                    <small class="pull-left">2 nights</small>
+                    <span class="pull-right">
+                        @if (ViewBag.Detail != null)
+                        {@ViewBag.Detail.Price}
+                </span>
+            </span>
+            <div id="cruise-features" class="tab-container">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="cruise-description">
+                            <div class="intro table-wrapper full-width hidden-table-sms" style="border-spacing: 0px;">
+                                <div class="col-sm-5 col-lg-4 features table-cell"style="padding:0px">
+                                    @*<ul>
+
+                                <li><label>Cruise name:</label>
+                                @if (ViewBag.Detail != null)
+                                { @ViewBag.Detail.Name}
+                                </li>
+                                <li><label>Cruise length:</label>@if (ViewBag.Detail != null)
+                                                                 {@ViewBag.Detail.Nights}</li>
+                                <li><label>Ship name:</label>Imagination</li>
+                                <li><label>Interior room:</label>$279</li>
+                                <li><label>Oceanview:</label>$269</li>
+                                <li><label>Balcony:</label>Not Offered</li>
+                                <li><label>Suite:</label>@if (ViewBag.Detail != null){@ViewBag.Detail.Price}</li>
+                                <li><label>Save per room:</label>20%</li>
+                            </ul>*@
+                                    <ul>
+                                        <li><label>hotel type:</label>@ViewBag.Detail.Stars star </li>
+                                        <li><label>Extra people:</label>No Charge</li>
+                                        <li><label>Minimum Stay:</label>@ViewBag.Detail.Nights nights</li>
+                                        <li><label>Security Deposit:</label>$279</li>
+                                        <li><label>Country:</label>France</li>
+                                        <li><label>City:</label>Paris</li>
+                                        <li><label>Neighborhood:</label>République</li>
+                                        <li><label>Cancellation:</label>strict</li>
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            @*<div class="feedback clearfix">
+                <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="5 stars"><span class="five-stars" style="width: 80%;"></span></div>
+                @*<span class="review pull-right">
+                </span>*@
+
+
+            <a class="button yellow full-width uppercase btn-small">add to wishlist</a>
+        </div>
+    </article>
+    <div class="travelo-box contact-box">
+        <h4>Need Andgo.com Help?</h4>
+        <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+        <address class="contact-details">
+            <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+            <br>
+            <a class="contact-email" href="#">help@andgo.com</a>
+        </address>
+    </div>
+    <div class="travelo-box">
+        <h4>Similar Listings</h4>
+        <div class="image-box style14">
+            @if (ViewBag.Promotion != null)
+            {
+                foreach (var m in ViewBag.Promotion)
+                {
+                    <article class="box">
+                        <figure>
+                            <a href="#"><img style="height:auto;" src="@m.Image" alt=""></a>
+                        </figure>
+                        <div class="details">
+                            <h5 class="box-title"><a href="@Url.Action("Detail", "Home", new { InventoryID = 397 })">@m.Name</a></h5>
+                            <label class="price-wrapper">
+                                <span class="price-per-unit">R @(m.Price)</span>avg/night
+                            </label>
+
+                        </div>
+                    </article>
+                }
+            }
+
+           
+        </div>
+    </div>
+    <div class="travelo-box book-with-us-box">
+        <h4>Why Book with us?</h4>
+        <ul>
+            <li>
+                <i class="soap-icon-hotel-1 circle"></i>
+                <h5 class="title"><a href="#">135,00+ Hotels</a></h5>
+                <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+            <li>
+                <i class="soap-icon-savings circle"></i>
+                <h5 class="title"><a href="#">Low Rates &amp; Savings</a></h5>
+                <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+            <li>
+                <i class="soap-icon-support circle"></i>
+                <h5 class="title"><a href="#">Excellent Support</a></h5>
+                <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+    </div>
+</section>

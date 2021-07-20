@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Contact Us | " + ViewBag.Client.Name;
+}
+<div class="page-title-container">
+    <div class="container">
+        <div class="page-title pull-left">
+            <h2 class="entry-title">Contact Us</h2>
+        </div>
+        <ul class="breadcrumbs pull-right">
+            <li><a href="@Url.Content("~")">HOME</a></li>
+            <li class="active">Contact Us</li>
+        </ul>
+    </div>
+</div>
+
+<section id="content">
+    <div class="container">
+        <div id="main">
+            @if (ViewBag.Result != null)
+            {
+                <div class="alert alert-success">
+                    Message sent.
+                </div>
+            }
+            <div class="travelo-google-map block">
+                <iframe src="http://maps.google.com/maps?q=@ViewBag.Client.Name,@ViewBag.Client.AddressLine1,@ViewBag.Client.AddressLine2,@ViewBag.Client.City,@ViewBag.Client.Country,@ViewBag.Client.Code&ll=&z=11&output=embed" width="100%" height="260px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <div class="contact-address row block">
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-phone"></i>
+                        <div class="description" style="padding: 18px 15px 0 0;">
+                            @*<small>Awaiting your call</small>*@
+                            <h5><strong>Telephone:</strong> @ViewBag.Client.ContactNumber<br /><strong>Fax:</strong> @ViewBag.Client.FaxNumber</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-message"></i>
+                        <div class="description" style="padding: 18px 15px 0 0;">
+                            @*<small>Send us email on</small>*@
+                            <h5><a href="mailto:@ViewBag.Client.EmailAddress">@ViewBag.Client.EmailAddress</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-address"></i>
+                        <div class="description" style="padding: 18px 15px 0 0;">
+                            @*<small>meet us at</small>*@
+                            <h5>@ViewBag.Client.AddressLine1, @ViewBag.Client.AddressLine2,<br />@ViewBag.Client.City,@ViewBag.Client.Province, @ViewBag.Client.PostalCode</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="travelo-box box-full" style="height: 185px;">
+                <div class="col-md-3">
+                    <h4>Operating Hours:</h4>
+                    <p>
+                        Monday - Thursday: 08h30 to 17h00<br>
+                        Friday: 08h30 to 16h30<br>
+                        Closed on Saturdays, Sundays &amp; Public Holidays
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Postal Address:</h4>
+                    <p>
+                        Postnet Suite 199, Private Bag X3<br>
+                        Bloubergrant<br>
+                        7443
+                    </p>
+                </div>
+                @*<div class="col-md-3">
+                    <h4>Bank Details (Nedbank):</h4>
+                    <p>
+                        Web Travel Brands SA<br>
+                        Nedbank Current Account<br>
+                        Account number: 1022310879<br>
+                        Branch code: 198765
+                    </p>
+                </div>*@
+                <div class="col-md-6">
+                    <h4>Bank Details (First National Bank):</h4>
+                    <p>
+                        Web Travel Brands SA (PTY) LTD<br>
+                        FNB Current Account<br>
+                        Account number: 62374372052<br>
+                        Branch code: 203809
+                    </p>
+                </div>
+            </div>
+            <div class="travelo-box box-full">
+                <div class="contact-form">
+                    <h2>Send us a Message</h2>
+                    <form action="@Url.Content("~/contact")" method="post">
+                        <input type="hidden" name="group" value="Contact" />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Your Name</label>
+                                    <input type="text" name="name" class="input-text full-width" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Your Email</label>
+                                    <input type="email" name="email" class="input-text full-width" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Number</label>
+                                    <input type="text" name="number" class="input-text full-width">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label>Your Enquiry</label>
+                                    <textarea name="message" rows="10" class="input-text full-width" placeholder="write enquiry here" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-offset-6 col-sm-offset-6 col-md-offset-8 col-lg-offset-9">
+                                <button class="btn-medium full-width submit-form">SEND ENQUIRY</button>
+                                <input type="submit" id="submit" class="hide" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript">
+        tjq(".travelo-google-map").gmap3({
+            map: {
+                options: {
+                    center: [-33.8143804, 18.4942556],
+                    zoom: 12
+                }
+            },
+            marker: {
+                values: [
+                    { latLng: [-33.8143804, 18.4942556], data: "Cape Town" }
+
+                ],
+                options: {
+                    draggable: false
+                },
+            }
+        });
+    </script>
+}

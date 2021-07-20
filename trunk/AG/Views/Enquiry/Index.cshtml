@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "Enquiry | " + ViewBag.Client.Name;
+}
+<div class="page-title-container">
+    <div class="container">
+        <div class="page-title pull-left">
+            <h2 class="entry-title">@ViewBag.Result.Name</h2>
+        </div>
+        <ul class="breadcrumbs pull-right">
+            <li><a href="@Url.Content("~")">HOME</a></li>
+            <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Result.Category.Name.ToString().Replace(" ", "-"), ViewBag.Result.Meta.Alias))">@ViewBag.Result.Name</a></li>
+            <li class="active">Enquiry</li>
+        </ul>
+    </div>
+</div>
+
+<section id="content">
+    <div class="container">
+        <div id="main">
+            <div class="travelo-box">
+                <div class="contact-form">
+                    <h2>Complete the enquiry form below <small>one of our consultants will be in contact with you shortly</small></h2>
+                    <p>For more information and up to date pricing complete your details below and one of our experienced travel consultants will get back to you. <br />Alternatively you can call <strong>021 556 5884</strong> to fast track your inquiry.<br />&nbsp;</p>
+                    <form method="post" action="@Url.Content(string.Format("~/enquiry-for-{0}-sent/{1}", ViewBag.Result.Meta.Alias, ViewBag.Result.ID))">
+                        <input type="hidden" name="group" value="Enquiry" />
+                        <input type="hidden" name="subject" value="@string.Format("Enquiry for {0}", ViewBag.Result.Name)" />
+                        <input type="hidden" name="inventoryid" value="@ViewBag.Result.ID" />
+                        <input type="hidden" name="inventoryRateId" value="@Request.QueryString["rid"]" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Your Name</label>
+                                        <input type="text" name="name" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Your Email</label>
+                                        <input type="email" name="email" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Contact Number</label>
+                                        <input type="text" name="number" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Departure Date</label>
+                                        @*<input type="text" name="departure" class="input-text full-width">*@
+                                        <div class="datepicker-wrap from-today">
+                                            <input name="depart_date" type="text" class="input-text full-width" placeholder="mm/dd/yy" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Number of Nights</label>
+                                        <input type="text" name="nights" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Flexible with dates?</label>
+                                        <select name="flexible_dates" style="width:100%;" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Destination</label>
+                                        <input type="text" name="destination" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Departure City/Airport</label>
+                                        <input type="text" name="depart_from" class="input-text full-width" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group" style="visibility:hidden;">
+                                        <label>Blank</label>
+                                        <input type="text" name="" class="input-text full-width">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <strong>TRAVELERS:</strong>
+                                    <hr style="margin: 4px 0 12px 0;" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Adults</label>
+                                        <select name="adults" style="width:100%;" required>
+                                            <option value="0" disabled>0</option>
+                                            <option value="1" selected>1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Children under 12 years</label>
+                                        <select type="select" name="children" style="width:100%;" required>
+                                            <option value="0" selected>0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Ages of Children (if applicable)</label>
+                                        <input type="text" name="children_ages" class="input-text full-width" placeholder="i.e 3,9">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Budget Per Person:</label>
+                                        <select type="select" name="budget" class="form-text required" style="width:100%;" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="Less than R10,000">Less than R10,000</option>
+                                            <option value="R10,000 – R15,000">R10,000 – R15,000</option>
+                                            <option value="R15,000 – R20,000">R15,000 – R20,000</option>
+                                            <option value="R20,000 – R25,000">R20,000 – R25,000</option>
+                                            <option value="R25,000 – R30,000">R25,000 – R30,000</option>
+                                            <option value="More than R30,000">More than R30,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Additional Comments (e.g honeymoon, anniversary, birthday etc)</label>
+                                        <textarea name="comments" rows="5" class="input-text full-width" placeholder="Write your comments here..." required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="col-md-1">
+                                                    <input style="float:left;" type="checkbox" name="newsletter" checked>
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <label style="float:left;">Please send me information on product updates, newsletters, and special offers.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sms-offset-6 col-sm-offset-6 col-md-offset-8 col-lg-offset-9">
+                                        <button class="btn-medium full-width submit-form">SEND ENQUIRY</button>
+                                        <input type="submit" id="submit" class="hide" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <article class="detailed-logo">
+                                    <figure>
+                                        <img width="114" height="85" src="@ViewBag.Result.Image" alt="">
+                                    </figure>
+                                    <div class="details">
+                                        <h2 class="box-title">
+                                            @if (ViewBag.Result != null)
+                                            {@ViewBag.Result.Name}
+                                            <small>@ViewBag.Result.Tagline</small>
+                                        </h2>
+                                        @foreach (var rate in ViewBag.Result.Rates)
+                                        {
+                                            if ((!string.IsNullOrEmpty(Request.QueryString["rid"]) && rate.ID == int.Parse(Request.QueryString["rid"])) || string.IsNullOrEmpty(Request.QueryString["rid"]))
+                                            {
+                                                <span class="price clearfix">
+                                                    <small class="pull-left">
+                                                        @if (rate.Nights > 0)
+                                                        {
+                                                            <text>@rate.Nights night@(rate.Nights != 1 ? "s" : "")</text>
+                                                        }
+                                                        @if (rate.Days > 0)
+                                                        {
+                                                            <text>@rate.Days day@(rate.Days != 1 ? "s" : "")</text>
+                                                        }
+                                                    </small>
+                                                    from R<span class="pull-right">@rate.Sell</span><br />
+                                                    @if (!string.IsNullOrEmpty(rate.From.ToString()) && !string.IsNullOrEmpty(rate.To.ToString()))
+                                                    {
+                                                        <small class="pull-right" style="line-height:0.5em;margin-bottom: 10px;">Valid @DateTime.Parse(rate.From.ToString()).ToString("yyyy-MM-dd") - @DateTime.Parse(rate.To.ToString()).ToString("yyyy-MM-dd")</small>
+                                                    }
+                                                </span>
+                                            }
+                                        }
+                                        <a class="button yellow full-width uppercase btn-small" href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Result.Category.Meta.Alias, ViewBag.Result.Meta.Alias))">Back to package</a>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="contact-address row block">
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-phone"></i>
+                        <div class="description" style="padding: 6px 15px 0 0;">
+                            <small>Awaiting your call</small>
+                            <h5><strong>Telephone:</strong> @ViewBag.Client.ContactNumber<br /><strong>Fax:</strong> @ViewBag.Client.FaxNumber</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-message"></i>
+                        <div class="description">
+                            <small>Send us email on</small>
+                            <h5><a href="mailto:@ViewBag.Client.EmailAddress">@ViewBag.Client.EmailAddress</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon-box style5">
+                        <i class="soap-icon-address"></i>
+                        <div class="description" style="padding: 6px 15px 0 0;">
+                            <small>meet us at</small>
+                            <h5>@ViewBag.Client.AddressLine2, @ViewBag.Client.City, <br />@ViewBag.Client.Province, @ViewBag.Client.Country, @ViewBag.Client.PostalCode</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

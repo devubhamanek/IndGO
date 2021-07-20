@@ -1,0 +1,326 @@
+﻿@{
+    ViewBag.Title = ViewBag.Detail.Name + " | " + ViewBag.Client.Name;
+    ViewBag.Keywords = ViewBag.Detail.Meta.Keywords;
+    ViewBag.Description = ViewBag.Detail.Meta.Description;
+}
+
+<style>
+    pre {
+        background-color: #ffffff;
+        border: 0px solid #ccc;
+        font-size: 1.0833em;
+        line-height: 1.6666;
+        margin-bottom: 15px;
+        margin: 0 0 10px;
+        font: 125% "Lato", Arial, Helvetica, sans-serif;
+        background-color: #fff;
+        color: #838383;
+    }
+</style>
+
+<input type="hidden" id="address" value="@ViewBag.Detail.Name" />
+
+<div class="page-title-container">
+    <div class="container">
+        <div class="page-title pull-left">
+            <h2 class="entry-title">@ViewBag.Detail.Name</h2>
+        </div>
+        <ul class="breadcrumbs pull-right">
+            <li><a href="@Url.Content("~")">HOME</a></li>
+            <li class="active">@ViewBag.Detail.Name</li>
+        </ul>
+    </div>
+</div>
+<section id="content2">
+    <div class="section container">
+        <div id="main" class="col-md-8">
+            <div class="tab-container style1" id="hotel-main-content">
+                <ul class="tabs">
+                    <li class="active"><a data-toggle="tab" href="#photos-tab">photos</a></li>
+                    <li><a data-toggle="tab" href="#map-tab">map</a></li>
+                    @*<li><a data-toggle="tab" href="#street-view-tab">street view</a></li>*@
+                    @*<li class="pull-right"><a class="button btn-small yellow-bg white-color" href="#">TRAVEL GUIDE</a></li>*@
+                </ul>
+                <div class="tab-content">
+                    <div id="photos-tab" class="tab-pane fade in active">
+                        <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+
+                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                <ul class="slides" style="width: 2600%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(-8700px, 0px, 0px); transform: translate3d(-8700px, 0px, 0px);">
+                                    @foreach (var image in ViewBag.Detail.Images)
+                                    {
+                                        <li class="clone" aria-hidden="true" style="width: 870px; float: left; display: block;max-height:320px;"><img src="@image.ImagePath" alt="" draggable="false" style="margin-top:-100px"></li>
+                                    }
+                                </ul>
+                            </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="">3</a></li><li><a class="">4</a></li><li><a class="">5</a></li><li><a class="">6</a></li><li><a class="">7</a></li><li><a class="">8</a></li><li><a class="">9</a></li><li><a class="flex-active">10</a></li><li><a class="">11</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                        </div>
+                        <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+
+                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                <ul class="slides" style="width: 2200%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(-90px, 0px, 0px); transform: translate3d(-90px, 0px, 0px);">
+                                    @foreach (var image in ViewBag.Detail.Images)
+                                    {
+                                        <li class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="@image.ImagePath" alt=" " draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                    }
+                                </ul>
+                            </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                        </div>
+                    </div>
+                    <div id="map-tab" class="tab-pane fade">
+                        @if (ViewBag.Detail != null)
+                        {
+                            <address>@ViewBag.Detail.Address</address>
+                        }
+                    </div>
+                </div>
+            </div>
+            @if (ViewBag.Detail != null)
+            {
+                <div id="cruise-features" class="tab-container">
+                    <ul class="tabs">
+                        <li class="active"><a href="#cruise-description" data-toggle="tab">Description</a></li>
+                        @if (ViewBag.Detail.Rates.Count > 0)
+                        {
+                            <li><a href="#tour-details" data-toggle="tab">Rates @*(@ViewBag.Detail.Rates.Count)*@</a></li>
+                        }
+                    </ul>
+                    <div class="tab-content" style="border-spacing: 0px;">
+                        <div class="tab-pane fade in active" id="cruise-description" style="padding:0px">
+                            <div class="intro table-wrapper full-width hidden-table-sms">
+                            </div>
+                            <div class="long-description travelo-box box-full">
+                                <h2>@ViewBag.Detail.Name</h2>
+                                <p>
+                                    @if (ViewBag.Detail != null)
+                                    {
+                                    <p>@Html.Raw(ViewBag.Detail.ShortDescription)</p>
+                                        <p>@Html.Raw(ViewBag.Detail.Description)</p>
+
+                                        if (ViewBag.Detail.Category != null)
+                                        {
+                                            <p>@Html.Raw(ViewBag.Detail.Category.Description)</p>
+                                        }
+                                    }
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tour-details" style="padding:0px">
+                                <div class="intro table-wrapper full-width hidden-table-sms">
+                                </div>
+                                <div class="long-description travelo-box box-full">
+                                    <h2>@ViewBag.Detail.Name Rates</h2>
+                                    <div class="detailed-features">
+                                        <div class="flights table-wrapper">
+                                            @foreach (var rate in ViewBag.Detail.Rates)
+                                            {
+                                                <div class="table-row">
+                                                    <div class="table-cell">
+                                                        <b>
+                                                            @if (rate.Nights > 0)
+                                                            {
+                                                                <text>@rate.Nights Nights</text>
+                                                            }
+                                                            else if (rate.Days > 0)
+                                                            {
+                                                                <text>@rate.Days Days</text>
+                                                            }
+                                                        </b>
+                                                    </div>
+                                                    <div class="table-cell">
+                                                        @if (!string.IsNullOrEmpty(rate.From.ToString()) && !string.IsNullOrEmpty(rate.To.ToString()))
+                                                        {
+                                                            <text>@DateTime.Parse(rate.From.ToString()).ToString("yyyy-MM-dd") - @DateTime.Parse(rate.To.ToString()).ToString("yyyy-MM-dd")</text>
+                                                        }
+                                                    </div>
+                                                    <div class="table-cell">
+                                                        <a href="@Url.Content(string.Format("~/enquiry-for-{0}?rid={1}", ViewBag.Detail.Meta.Alias, rate.ID))" class="button red btn-small uppercase pull-right">Enquire</a>
+                                                        <span class="price" style="padding-right:20px;"><small>from </small>R @rate.Sell</span>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+        <div class="sidebar col-md-4">
+            <article class="detailed-logo">
+                @*<figure>
+                        <img width="114" height="85" src="@ViewBag.Detail.Image" alt="">
+                    </figure>*@
+                <div class="details">
+                    <div data-placement="bottom" data-toggle="tooltip" title="@ViewBag.Detail.Stars star" class="five-stars-container pull-right">
+                        <span style="width: @(ViewBag.Detail.Stars * 20)%;" class="five-stars"></span>
+                    </div>
+                    <h2 class="box-title">
+                        @if (ViewBag.Detail != null)
+                        {@ViewBag.Detail.Name}
+                        <small>@ViewBag.Detail.Tagline</small>
+                    </h2>
+                    <span class="price clearfix">
+                        <small class="pull-left">
+                            @if (ViewBag.Detail.Nights > 0)
+                            {
+                                <text>@ViewBag.Detail.Nights night@(ViewBag.Detail.Nights != 1 ? "s" : "")</text>
+                            }
+                            @if (ViewBag.Detail.Days > 0)
+                            {
+                                <text>@ViewBag.Detail.Days day@(ViewBag.Detail.Days != 1 ? "s" : "")</text>
+                            }
+                        </small>
+                        from R<span class="pull-right">@ViewBag.Detail.Price</span><br />
+                        @if (!string.IsNullOrEmpty(ViewBag.Detail.DateStart.ToString()) && !string.IsNullOrEmpty(ViewBag.Detail.DateEnd.ToString()))
+                        {
+                            <small class="pull-right" style="line-height:0.5em;margin-bottom: 10px;">Valid @DateTime.Parse(ViewBag.Detail.DateStart.ToString()).ToString("yyyy-MM-dd") - @DateTime.Parse(ViewBag.Detail.DateEnd.ToString()).ToString("yyyy-MM-dd")</small>
+                        }
+                    </span>
+                    @if (!string.IsNullOrEmpty(ViewBag.Detail.Address.ToString()))
+                    {
+                        @*<p class="text-center">
+                                <img src="http://maps.googleapis.com/maps/api/staticmap?center=@ViewBag.Detail.Address,@ViewBag.Detail.Category.Name&zoom=12&size=320x120&sensor=false" />
+                            </p>*@
+                    }
+                    <a class="button red full-width uppercase btn-small" href="@Url.Content("~/enquiry-for-" + ViewBag.Detail.Meta.Alias)">Enquire NOW</a>
+                    <br />
+                </div>
+            </article>
+            <div class="travelo-box contact-box">
+                <h4>Need andgo.com Help?</h4>
+                <p>We would be more than happy to help you. Our team are at your service to help you.</p>
+                <span class="contact-details">
+                    <span class="contact-phone"><i class="soap-icon-phone"></i> @ViewBag.Client.ContactNumber</span>
+                    <br>
+                    <a class="contact-email" href="mailto:@ViewBag.Client.EmailAddress">@ViewBag.Client.EmailAddress</a>
+                </span>
+            </div>
+            <div class="travelo-box">
+                <h4>Other Offers</h4>
+                <div class="image-box style14">
+                    @if (ViewBag.OtherOffers != null)
+                    {
+                        foreach (var m in ViewBag.OtherOffers)
+                        {
+                            if (m.ID != ViewBag.Detail.ID)
+                            {
+                                <article class="box">
+                                    <figure>
+                                        <a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))"><img style="height:auto;" src="@m.Image" alt=""></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h5 class="box-title"><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))">@m.Name</a></h5>
+                                        <label class="price-wrapper">
+                                            from <span class="price-per-unit">R @(m.Price)</span>
+                                        </label>
+
+                                    </div>
+                                </article>
+                            }
+                        }
+                    }
+
+
+                </div>
+            </div>
+            <div class="travelo-box book-with-us-box">
+                <h4>Why Book with us?</h4>
+                <ul>
+                    <li>
+                        <i class="soap-icon-savings circle"></i>
+                        <h5 class="title"><a href="#">Best Deals</a></h5>
+                        <p>We pride ourselves in negotiating the best deals for you. Don’t pay more elsewhere!</p>
+                    </li>
+                    <li>
+                        <i class="soap-icon-doc-plus circle"></i>
+                        <h5 class="title"><a href="#">Large Selection</a></h5>
+                        <p>Our selection of hand-picked properties ensures a wide range of options to suit most budgets.</p>
+                    </li>
+                    <li>
+                        <i class="soap-icon-support circle"></i>
+                        <h5 class="title"><a href="#">Expert Advice</a></h5>
+                        <p>Our experienced Holiday Consultants will ensure that your holidays surpass all expectations.</p>
+                    </li>
+                    <li>
+                        <i class="soap-icon-lost-found circle"></i>
+                        <h5 class="title"><a href="#">Tailor-made</a></h5>
+                        <p>All of our packages are flexible and can be arranged to suit your specific requirements.</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript">
+
+        //tjq(document).ready(function () {
+
+        //    var map = null;
+        //    var panorama = null;
+        //    var fenway = new google.maps.LatLng(48.855702, 2.292577);
+
+        //    geocoder = new google.maps.Geocoder();
+        //    var address = document.getElementById("address").value;
+        //    geocoder.geocode({ 'address': address }, function (results, status) {
+
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            In this case it creates a marker, but you can get the lat and lng from the location.LatLng
+        //            map.setCenter(results[0].geometry.location);
+        //            var marker = new google.maps.Marker({
+        //                map: map,
+        //                position: results[0].geometry.location
+        //            });
+
+        //            fenway = results[0].geometry.location;
+        //            var mapOptions = {
+        //                center: fenway,
+        //                zoom: 16
+        //            };
+        //            var panoramaOptions = {
+        //                position: fenway,
+        //                pov: {
+        //                    heading: 34,
+        //                    pitch: 10
+        //                }
+        //            };
+
+        //            tjq("#map-tab").height(tjq("#hotel-main-content").width() * 0.6);
+        //            map = new google.maps.Map(document.getElementById('map-tab'), mapOptions);
+        //            map.setCenter(results[0].geometry.location);
+        //            var marker = new google.maps.Marker({
+        //                map: map,
+        //                position: results[0].geometry.location
+        //            });
+        //            panorama = new google.maps.StreetViewPanorama(document.getElementById('street-view-tab'), panoramaOptions);
+        //            map.setStreetView(panorama);
+
+        //            tjq('a[href="#map-tab"]').on('shown.bs.tab', function (e) {
+        //                var center = panorama.getPosition();
+        //                google.maps.event.trigger(map, "resize");
+        //                map.setCenter(center);
+        //            });
+        //            tjq('a[href="#street-view-tab"]').on('shown.bs.tab', function (e) {
+        //                fenway = panorama.getPosition();
+        //                panoramaOptions.position = fenway;
+        //                panorama = new google.maps.StreetViewPanorama(document.getElementById('street-view-tab'), panoramaOptions);
+        //                map.setStreetView(panorama);
+        //            });
+        //        } else {
+
+        //            tjq('[href="#map-tab"]').hide();
+        //            tjq('[href="#street-view-tab"]').hide();
+        //        }
+        //    });
+        //});
+
+        //function initialize() {
+
+        //}
+        //google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}

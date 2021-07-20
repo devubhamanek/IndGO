@@ -1,0 +1,588 @@
+﻿@{
+    ViewBag.Title = "andgo.com | Ready-packaged and tailor-made holidays";
+}
+
+@if (ViewBag.InventoryBanner.Count > 0)
+{
+    <div id="slideshow" style="max-width:1350px;margin:0 auto;">
+        <div class="fullwidthbanner-container">
+            <div class="revolution-slider" style="height: 0; overflow: hidden;">
+                <ul>
+                    @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.InventoryBanner)))
+                    {
+                        <li data-transition="" data-slotamount="@ViewBag.InventoryBanner.Count" data-masterspeed="1500">
+                            <img src="@m.Image.ToString().Replace(" ", "%20")" title="@m.Name" alt="@m.Name" />
+                            <div style="background-color: #fff;z-index: 9999999999;font-size: 20px;position: absolute;top: 90px;right: 150px;opacity: 0.9;padding-top: 20px;padding-left: 20px;padding-right: 20px;color: #000;">
+                                <h4 style="text-shadow: 0px 1px 1px rgba(109, 109, 109, 0.6) !important;">
+                                    @m.Name<br /><small>@m.Nights Nights from R@(decimal.Parse(m.Price.ToString()).ToString("# ###"))pp -</small><span style="font-size: 72%;text-transform: uppercase;"><small> @m.Category.Name</small></span>
+                                </h4>
+                                <a class="button" style="width:100%;line-height: 20px !important;margin-bottom: 20px;background: #F15F29;" href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))">MAKE AN ENQUIRY</a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div style="height:80px;"></div>
+}
+<section id="content">
+    <div class="search-box-wrapper">
+        <div class="search-box container">
+            <ul class="search-tabs clearfix">
+                <li class="active"><a href="#specialOffers" data-toggle="tab">Special Offers</a></li>
+                @for (int i = 0; i < ViewBag.Categories.Count; i++)
+                {
+                    var c = ViewBag.Categories[i];
+                    if (c.Parent == null && ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.CategoryID == c.ID || ((IEnumerable<dynamic>)(c.Children)).Any(ch => ch.ID == m.CategoryID)).Count() > 0)
+                    {
+                        if (((IEnumerable<dynamic>)c.Children).Count() > 0)
+                        {
+
+                            <li class="dropdown">
+                                <a href="#@c.ID" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">@c.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+                                    <li style="padding-right: 0px;">
+                                        <a href="#@c.ID" role="tab" data-toggle="tab" style=" min-width: 258px; padding-right: 0; font-size: 12px;">View All</a>
+                                    </li>
+                                    @foreach (var child in ((IEnumerable<dynamic>)c.Children))
+                                    {
+                                        if (((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.CategoryID == child.ID).Count() > 0)
+                                        {
+                                            <li style="padding-right: 0px;">
+                                                <a href="#@child.ID" role="tab" data-toggle="tab" style=" min-width: 258px; padding-right: 0; font-size: 12px;">@child.Name</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="#@c.ID" data-toggle="tab">@c.Name</a></li>
+                        }
+                    }
+                }
+            </ul>
+            <div class="visible-mobile">
+                <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                    @for (int i = 0; i < ViewBag.Categories.Count; i++)
+                    {
+                        var c = ViewBag.Categories[i];
+                        if (c.Parent == null && ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.CategoryID == c.ID || ((IEnumerable<dynamic>)(c.Children)).Any(ch => ch.ID == m.CategoryID)).Count() > 0)
+                        {
+                            <li><a href="#@c.ID" data-toggle="tab">@c.Name</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+
+            <div class="search-tab-content">
+                <div class="tab-pane fade active in" id="specialOffers">
+                    <h2>Special Offers</h2>
+                    <div class="row image-box style3">
+                        @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.IsOnPromotion).OrderBy(x => x.Price))
+                        {
+                            <div class="col-sms-6 col-sm-6 col-md-3">
+                                <article class="box" style="min-height: 336px;">
+                                    <figure class="" data-animation-type="fadeInDown" data-animation-delay="0">
+                                        @*<a href="ajax/cruise-slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="Package Image" src="@m.Image"></a>*@
+                                        <a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))" class="hover-effect"><img width="270" height="160" alt="@m.Name" src="@m.Image"></a>
+                                    </figure>
+                                    <div class="details text-center no">
+                                        <h4 class="box-title text-no-wrap">@m.Name</h4>
+                                        <p class="offers-content">@m.Category.Name</p>
+                                        <div class="stars-container" style="">
+                                            @if (m.Stars == 1)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="1 star" class="five-stars-container">
+                                                    <span style="width: 20%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 2)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="2 stars" class="five-stars-container">
+                                                    <span style="width: 40%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 3)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="3 stars" class="five-stars-container">
+                                                    <span style="width: 60%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 4)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="4 stars" class="five-stars-container">
+                                                    <span style="width: 80%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 5)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="5 stars" class="five-stars-container">
+                                                    <span style="width: 100%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p class="description">From R @(m.Price)</p>
+                                        <a class="button" href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))">VIEW MORE</a>
+                                    </div>
+                                </article>
+                            </div>
+                        }
+                        @*<div class="row">
+                                <div class="col-md-12" style="text-align:center;">
+                                    <ul class="pagination clearfix">
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li class="disabled"><span>...</span></li>
+                                        <li><a href="#">5</a></li>
+                                    </ul>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="290">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <h2>
+                            South Africa
+                            @if (((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Category.ID == 290 || m.Category.ParentID == 290).Count() > 8)
+                            {
+                                <small class="pull-right"><a class="button" href="@Url.Content(string.Format("~/{0}-packages", ((IEnumerable<dynamic>)(ViewBag.Categories)).FirstOrDefault(m=>m.ID==290).Meta.Alias))">VIEW ALL</a></small>
+                            }
+                        </h2>
+                    </div>
+                    <div class="row image-box style3">
+                        @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Category.ID == 290 || m.Category.ParentID == 290).OrderBy(x => x.Price).Take(8))
+                        {
+                            <div class="col-sms-6 col-sm-6 col-md-3">
+                                <article class="box" style="min-height: 336px;">
+                                    <figure class="" data-animation-type="fadeInDown" data-animation-delay="0">
+                                        @*<a href="ajax/cruise-slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="Package Image" src="@m.Image"></a>*@
+                                        <a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))" class="hover-effect"><img width="270" height="160" alt="@m.Name" src="@m.Image"></a>
+                                    </figure>
+                                    <div class="details text-center no">
+                                        <h4 class="box-title text-no-wrap">@m.Name</h4>
+                                        <p class="offers-content">@m.Category.Name</p>
+                                        <div class="stars-container" style="">
+                                            @if (m.Stars == 1)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="1 star" class="five-stars-container">
+                                                    <span style="width: 20%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 2)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="2 stars" class="five-stars-container">
+                                                    <span style="width: 40%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 3)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="3 stars" class="five-stars-container">
+                                                    <span style="width: 60%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 4)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="4 stars" class="five-stars-container">
+                                                    <span style="width: 80%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 5)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="5 stars" class="five-stars-container">
+                                                    <span style="width: 100%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p class="description">From R @(m.Price)</p>
+                                        <a class="button" href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))">VIEW MORE</a>
+                                    </div>
+                                </article>
+                            </div>
+                        }
+                        @*<div class="row">
+                                <div class="col-md-12" style="text-align:center;">
+                                    <ul class="pagination clearfix">
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li class="disabled"><span>...</span></li>
+                                        <li><a href="#">5</a></li>
+                                    </ul>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="140">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <h2>
+                            Thailand
+                            @if (((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Category.ID == 140 || m.Category.ParentID == 140).Count() > 8)
+                            {
+                                <small class="pull-right"><a class="button" href="@Url.Content(string.Format("~/{0}-packages", ((IEnumerable<dynamic>)(ViewBag.Categories)).FirstOrDefault(m => m.ID == 140).Meta.Alias))">VIEW ALL</a></small>
+                            }
+                        </h2>
+                    </div>
+                    <div class="row image-box style3">
+                        @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Category.ID == 140 || m.Category.ParentID == 140).OrderBy(x => x.Price).Take(8))
+                        {
+                            <div class="col-sms-6 col-sm-6 col-md-3">
+                                <article class="box" style="min-height: 336px;">
+                                    <figure class="" data-animation-type="fadeInDown" data-animation-delay="0">
+                                        @*<a href="ajax/cruise-slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="Package Image" src="@m.Image"></a>*@
+                                        <a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))" class="hover-effect"><img width="270" height="160" alt="@m.Name" src="@m.Image"></a>
+                                    </figure>
+                                    <div class="details text-center no">
+                                        <h4 class="box-title text-no-wrap">@m.Name</h4>
+                                        <p class="offers-content">@m.Category.Name</p>
+                                        <div class="stars-container" style="">
+                                            @if (m.Stars == 1)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="1 star" class="five-stars-container">
+                                                    <span style="width: 20%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 2)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="2 stars" class="five-stars-container">
+                                                    <span style="width: 40%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 3)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="3 stars" class="five-stars-container">
+                                                    <span style="width: 60%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 4)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="4 stars" class="five-stars-container">
+                                                    <span style="width: 80%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 5)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="5 stars" class="five-stars-container">
+                                                    <span style="width: 100%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p class="description">From R @(m.Price)</p>
+                                        <a class="button" href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))">VIEW MORE</a>
+                                    </div>
+                                </article>
+                            </div>
+                        }
+                    </div>
+                </div>
+                @for (int i = 0; i < ViewBag.Categories.Count; i++)
+                {
+                    var c = ViewBag.Categories[i];
+                    if (c.ID != 290 && c.ID != 140)
+                    {
+                        var inventories = ((IEnumerable<dynamic>)(ViewBag.Inventory));
+                        <div class="tab-pane fade" id="@c.ID">
+                            <h2>
+                                @c.Name
+                                @if (inventories.Where(m => m.CategoryID == c.ID).Count() > 8)
+                                {
+                                    <small class="pull-right"><a class="button" href="@Url.Content(string.Format("~/{0}-packages", c.Meta.Alias))">VIEW ALL</a></small>
+                                }
+                            </h2>
+                            <div class="row image-box style3">
+                                @foreach (var m in inventories.Where(m => m.CategoryID == c.ID).OrderBy(x => x.Price).Take(8))
+                                {
+                                    <div class="col-sms-6 col-sm-6 col-md-3">
+                                        <article class="box" style="min-height: 336px;">
+                                            <figure class="" data-animation-type="fadeInDown" data-animation-delay="0">
+                                                @*<a href="ajax/cruise-slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="Package Image" src="@m.Image"></a>*@
+                                                <a href="@Url.Content(string.Format("~/{0}-package/{1}",  m.Category.Meta.Alias, m.Meta.Alias))" class="hover-effect"><img width="270" height="160" alt="@m.Name" src="@m.Image"></a>
+                                            </figure>
+                                            <div class="details text-center no">
+                                                <h4 class="box-title text-no-wrap">@m.Name</h4>
+                                                <p class="offers-content">@m.Category.Name</p>
+                                                <div class="stars-container" style="">
+                                                    @if (m.Stars == 1)
+                                                    {
+                                                        <div data-placement="bottom" data-toggle="tooltip" title="1 star" class="five-stars-container">
+                                                            <span style="width: 20%;" class="five-stars"></span>
+                                                        </div>
+                                                    }
+                                                    else if (m.Stars == 2)
+                                                    {
+                                                        <div data-placement="bottom" data-toggle="tooltip" title="2 stars" class="five-stars-container">
+                                                            <span style="width: 40%;" class="five-stars"></span>
+                                                        </div>
+                                                    }
+                                                    else if (m.Stars == 3)
+                                                    {
+                                                        <div data-placement="bottom" data-toggle="tooltip" title="3 stars" class="five-stars-container">
+                                                            <span style="width: 60%;" class="five-stars"></span>
+                                                        </div>
+                                                    }
+                                                    else if (m.Stars == 4)
+                                                    {
+                                                        <div data-placement="bottom" data-toggle="tooltip" title="4 stars" class="five-stars-container">
+                                                            <span style="width: 80%;" class="five-stars"></span>
+                                                        </div>
+                                                    }
+                                                    else if (m.Stars == 5)
+                                                    {
+                                                        <div data-placement="bottom" data-toggle="tooltip" title="5 stars" class="five-stars-container">
+                                                            <span style="width: 100%;" class="five-stars"></span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <p class="description">From R @(m.Price)</p>
+                                                <a class="button" href="@Url.Content(string.Format("~/{0}-package/{1}",  m.Category.Meta.Alias, m.Meta.Alias))">VIEW MORE</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                }
+                                @*<div class="row">
+                                        <div class="col-md-12" style="text-align:center;">
+                                            <ul class="pagination clearfix">
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li class="disabled"><span>...</span></li>
+                                                <li><a href="#">5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>*@
+
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <section id="content" class="gray-area">
+            <div class="container shortcode">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Client Testimonials</h2>
+                        <div class="testimonial style1 box">
+                            <ul class="slides ">
+                                <li>
+                                    <p class="description">
+                                        "Hi Megan,<br />
+                                        <br />
+                                        Trust you are well.<br />
+                                        Just want to say thanks so much for your excellent service organising our trip (Bangkok and Phuket), everything went off very well.
+                                        The floating market was awesome and I just want to tell you that I went on the small boats. LOL. what an experience.<br/>
+                                        Thanks again and kind Regards"
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Claudell van Aswegen<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Good evening,<br />
+                                        <br />
+                                        I would like to thank you for such an awesome holiday. Everything went smoothly from traveling to the hotel. Oh my God the hotel was paradise and the staff very friendly and service was excellent. The hotel only few steps to the beach. The food wow.
+                                        My sisters were so happy and speechless. Me and my family have no words to express our gratitude.<br />
+                                        Thank you so much."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Judith Matenje<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Dear Megan<br />
+                                        <br />
+                                        We just want to thank you for your part in arranging our very nice long weekend away.  We enjoyed everything and all the excursions were perfectly arranged.  We had no problems anywhere and just
+                                        want to thank you again."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Marieta Hibbert<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Hi Megan<br />
+                                        <br />
+                                        Trust you are well.<br />
+                                        <br />
+                                        Just want to say thanks so much for your excellent service organising our trip (Bangkok and Phuket), everything went off very well.<br />
+                                        <br />
+                                        The floating market was awesome and I just want to tell you that I went on the small boats. LOL. what an experience."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Claudell van Aswegen<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Hi Megan<br /><br />
+                                        This is just to thank you for making my trip to Zanzibar worthwhile from when I started making the booking until I left. The choice of the hotel Double Tree by Hilton was spot on enjoyed every minute.<br /><br />
+                                        The shuttle serving was on time from the airport to the day we left. I will recommend your company especially you to my friends when they want to travel. Thank you and keep up the good work we lack service in SA so if there are still people like you there is still hope."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Nomonde Mbekeni<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Megan, once again, many thanks for all the arrangements. We just had a minor hiccup with getting twin beds, but Bongani, one of the Vic Falls Hotel managers attended to the matter promptly. He was most helpful in taking care of us, and our wishes. My father was in his element as he was in the hotel in 1955 and 1956 (he is now 73 years old).  I was in my element as I am an accredited voluntary heritage tour guide and travel advisor, and this was very special for me. Overall, we build great memories. Sharon from Shearwater (our transfers) was great; at the Vic Falls Hotel, Bongani went over and above the call of duty to make us feel special, Leonard (waiter at breakfast) was most attentive, the staff were courteous, and the hotel was very clean. Our drivers (Shearwater) were also most helpful and informative.<br />
+                                        <br />
+                                        Of course, I would also like to thank you for all your assistance. All the best, and we will chat soon."<br />
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Pascale J.<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Thank you Megan, for being such a diligent, friendly, caring and very professional person. You noted and booked exactly what we were looking for. The times and transfers were spot on… what an amazing holiday and look forward to planning future holidays with you. Everything from flights to pick-ups, hotel and all the other arrangements were excellent. Thanks for the brilliant package you gave us.<br />
+                                        <br />
+                                        You’re a star! We hope to do business with you again and will definitely recommend you to friends and family for future bookings."<br />
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Rekha Gobind<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "My whole Zanzibar experience was phenomenal. I thoroughly enjoyed it - the flights, excursions, scenery,  food, the accommodation and all the new friends I have made - local and tourists. What struck me as such great qualities were the Zanzibarians' extra-ordinary modesty,  friendliness and content with what they have. They are all such special, wonderful people. I have told several people during my stay that I have worked through a fantastic agency group and wonderful,  professional agent. You have planned everything so well and everything went absolutely smooth all the way. I would recommend you to anyone and would love to make use of your exceptional services again. Zanzibar must see me again! I managed to relax and be encouraged and find myself again in these 4 days. Next time I would like to go for 7-10 days."<br />
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Chris Rudman<small>GUEST</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                         "Megan,I just also wanted to say thank you for your excellent service it’s so great dealing with good people in this world."<br />
+
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Richard Yeo<small>Pricing Supervisor</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "I want to applaud the high standard of professionalism and willingness for service excellence that you have within your office.
+                                        Progress is the consultant I dealt with and she is truly a gem and from my side needs to be recognised as a true champion.
+                                        I travel yearly (on a tight budget) and will definitely make use of your company again solely due to the service rendered.
+                                        I hope and trust Progress will become or already is one of your top consultants and please continue the way you are conducting your business."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Heini Walker<small>guest</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Willem and I had a fantastic time at the Falls.
+                                        The kingdom Hotel is wonderful and the Falls were magnificent.  We did the Sunset cruise on the Friday night and on Saturday morning we did the short helicopter flight.  We walked through the reserve on the Saturday afternoon to see the Falls – got completely drenched – but it was great fun.
+                                        The transport company was excellent.  When they say they will pick you up at 10, they are there at 10.
+                                        I really do think that we needed an extra day there to get maximum benefit, so maybe next time we will make it 3 or 4 nights.
+                                        Thank you for your wonderful service.
+                                        I will get hold of you when we have decided what our next trip will be.""
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Sharon Van Dyk<small>guest</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">
+                                        "Thank you very much for the planning. The hotel was wonderful. The tour operators did a very good job and were always on time. The food at the hotel was good and the staff were exceptional. Please forward to them our greetings and compliments. Thank you for all your effort."
+                                    </p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Mr Master<small>guest</small></h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p class="description">"Sadly yes I am back to reality! We had a fantastic time, it was the perfect hotel so central! Thank you for all your assistance. I will definitely give you a shout for our next trip."</p>
+                                    <div class="author clearfix">
+                                        <a href="#"><img src="images/icon-profile.png" alt="" width="74" height="74" /></a>
+                                        <h5 class="name">Cherise Green<small>guest</small></h5>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="section parallax" data-stellar-background-ratio="0.5" style="background-position: 50% 37.5px;padding: 40px 0px 20px 0;background-color: rgb(245, 245, 245);">
+            <div class="container">
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInLeft" data-animation-type="slideInLeft" data-animation-delay="0" style="animation-duration: 1s; -webkit-animation-duration: 1s; visibility: visible;">
+                        <i class="soap-icon-features" style="font-size: 44px;"></i>
+                        <div class="description">
+                            <h4 class="box-title">On Promotion</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.IsOnPromotion).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInDown" data-animation-type="slideInDown" data-animation-delay="0.6" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 0.6s; -webkit-animation-delay: 0.6s; visibility: visible;">
+                        <i class="soap-icon-savings"></i>
+                        <div class="description">
+                            <h4 class="box-title">Below R10 000</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Price < 10000).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInDown" data-animation-type="slideInDown" data-animation-delay="0.9" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 0.9s; -webkit-animation-delay: 0.9s; visibility: visible;">
+                        <i class="soap-icon-plane"></i>
+                        <div class="description">
+                            <h4 class="box-title">Quick Getaways</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Nights <= 3).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInRight" data-animation-type="slideInRight" data-animation-delay="1.2" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 1.2s; -webkit-animation-delay: 1.2s; visibility: visible;">
+                        <i class="soap-icon-fireplace"></i>
+                        <div class="description">
+                            <h4 class="box-title">Luxury Stays</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Stars >= 5).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

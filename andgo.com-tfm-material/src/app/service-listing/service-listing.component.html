@@ -1,0 +1,12 @@
+<mdl-tabs mdl-ripple mdl-tab-active-index="0" class="home" *ngIf="type == 'destination'">
+    <mdl-tab-panel *ngFor="let section of sections | slice: 0:6">
+        <mdl-tab-panel-title>
+            <h6 [mdl-badge]="section.count ? section.count : ''">{{section.value}}</h6>
+        </mdl-tab-panel-title>
+        <mdl-tab-panel-content>
+            <app-service-list (count)="section.count=$event" [query]="section.query" [promo]="section.promo"></app-service-list>
+        </mdl-tab-panel-content>
+    </mdl-tab-panel>
+</mdl-tabs>
+
+<app-service-list *ngIf="type == 'packages-search'"></app-service-list>

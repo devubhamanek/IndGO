@@ -1,0 +1,124 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/pages/bookinfo2.css")" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text">You are on <a href="@Url.Content("~")">Home</a> / Login</div>
+        </div>
+    </div><!-- end of breadcrumbs -->
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="content">
+                <div class="wrapcontent">
+                    <h2>Your Account <small>Below are your previous bookings</small></h2>
+                    <hr />
+                    <div class="left" style="width:100%; margin: 0 21px 0 0;">
+                        @{
+                            if (Model != null && Model.Carts != null && Model.Carts.Count > 0)
+                            {
+                                var index = 0;
+                                foreach (var i in Model.Carts)
+                                {
+                                    foreach (var option in i.Items)
+                                    {
+                                        if (option.Inventory != null)
+                                        {
+                                            index = index + 1;
+                                            var stars = "";
+                                            if (option.Inventory.Stars == 1)
+                                            {
+                                                stars = "one";
+                                            }
+                                            else if (option.Inventory.Stars == 2)
+                                            {
+                                                stars = "two";
+                                            }
+                                            else if (option.Inventory.Stars == 3)
+                                            {
+                                                stars = "three";
+                                            }
+                                            else if (option.Inventory.Stars == 4)
+                                            {
+                                                stars = "four";
+                                            }
+                                            else if (option.Inventory.Stars == 5)
+                                            {
+                                                stars = "five";
+                                            }
+
+
+                                            <div class="title">
+                                                <div class="number">@index</div>
+                                                <h2>@option.Inventory.Name <small>@(option.Inventory.Region != null ? option.Inventory.Region.Name : "") @option.Inventory.Address | Created @DateTime.Parse(i.Created.ToString()).ToString("dd MMM yyyy")</small></h2>
+                                            </div>
+
+                                            <div class="ydetails" style="border-left: 1px dashed #e1e1e1; padding: 0 0 0px 20px; margin: 0 1px 0px;">
+                                                <div class="row mid" style="margin-right:0px;border-left:0px;border-bottom:0px;border-right:0px;">
+                                                    <div class="col-md-3">
+                                                        <img alt="bookinfo" style="width:100%;  max-height: 120px;" src="@(!string.IsNullOrEmpty(option.Inventory.Image.ToString()) ? option.Inventory.Image : Url.Content("~/content/images/294x159.gif"))" />
+                                                        <div class="rated"><div class="stars @stars"></div></div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <ul style="float:left; padding-left:10px;  margin-top: 0px;position:relative;z-index:10;">
+                                                            @if (option.SearchCriteria != null && option.SearchCriteria.Rooms != null)
+                                                            {
+                                                                <li>Check-In <div class="subli">@DateTime.Parse(option.SearchCriteria.From.ToString()).ToString("ddd dd MMM yyyy")</div></li>
+                                                                <li>Check-Out <div class="subli">@DateTime.Parse(option.SearchCriteria.To.ToString()).ToString("ddd dd MMM yyyy")</div></li>
+                                                                <li>Occupancy <div class="subli">@option.SearchCriteria.Rooms[0].Guests.ToString() Guests (@option.SearchCriteria.Rooms.Count Room)</div></li>
+                                                            }
+
+                                                            @if (option.CancellationCondition != null)
+                                                            {
+                                                                <li style="color:red;">@Html.Raw(string.Join("<br/>", option.CancellationCondition.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)))</li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-3 col-md-offset-1 right text-center" style="width: auto;">
+                                                        <h4>@option.Status</h4>
+                                                        <div class="price" style="padding: 0px 0 0 0px;"><span class="dollar">R </span>@i.Total</div>
+                                                        @if (option.ConfirmationCode != null)
+                                                        {
+                                                            <h3>
+                                                                <small>Voucher Number</small><br />@option.ConfirmationCode<br />
+                                                            </h3>
+                                                            <div class="clearfix"></div>
+                                                            <span class="text-center">
+                                                                <a href="http://icore.infinityweb.co.za/iTS/Cart/PDF/@i.Guid" target="_blank" class="tool-tip" title="Download Confirmation PDF">Download</a> |
+                                                                <a href="@Url.Content(string.Format("~/CancelConfirmed/{0}", i.Guid))" onclick="return confirm('@string.Format("Do you want to cancel with the following condition: {0}", Html.Raw(string.Join(Environment.NewLine, option.CancellationCondition.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))))')" class="tool-tip" title="Cancel this booking - cancellation charges may apply">Cancel</a>
+                                                            </span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <h3>Your have no previous orders</h3>
+                            }
+                        }
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/css")
+}
+
+
+
+

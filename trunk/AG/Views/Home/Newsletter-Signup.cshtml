@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Newsletter Signup | " + ViewBag.Client.Name;
+}
+<div class="page-title-container">
+    <div class="container">
+        <div class="page-title pull-left">
+            <h2 class="entry-title">Newsletter Signup</h2>
+        </div>
+        <ul class="breadcrumbs pull-right">
+            <li><a href="@Url.Content("~")">HOME</a></li>
+            <li class="active">Newsletter Signup</li>
+        </ul>
+    </div>
+</div>
+
+<section id="content">
+    <div class="container">
+        <div id="main">
+            <div class="image-style style1 large-block">
+
+                <h1 class="title">Newsletter Signup</h1>
+                <p>You have successfully subscribed to the <strong>@ViewBag.Client.Name</strong> newsletter.</p>
+                <div class="clearfix"></div>
+            </div>
+        </div> <!-- end main -->
+    </div>
+</section>

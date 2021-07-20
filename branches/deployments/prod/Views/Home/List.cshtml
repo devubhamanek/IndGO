@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "andgo.com | Ready-packaged and tailor-made holidays";
+}
+
+@if (((IEnumerable<dynamic>)(ViewBag.InventoryBanner)).Count() > 0)
+{
+<div id="slideshow">
+    <div class="fullwidthbanner-container">
+        <div class="revolution-slider" style="height: 0; overflow: hidden;">
+            <ul>
+                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.InventoryBanner)))
+                {
+                    <li data-transition="zoomout" data-slotamount="@ViewBag.InventoryBanner.Count" data-masterspeed="1500">
+                        <img src="@m.Image.ToString().Replace(" ", "%20")" title="@m.Name" alt="@m.Name" />
+                        <div style="background-color: #fff;z-index: 9999999999;font-size: 20px;position: absolute;top: 90px;right: 150px;opacity: 0.9;padding-top: 20px;padding-left: 20px;padding-right: 20px;color: #000;">
+                            <h4 style="text-shadow: 0px 1px 1px rgba(109, 109, 109, 0.6) !important;">@m.Name<br /><small>@m.Nights Nights from R@(decimal.Parse(m.Price.ToString()).ToString("# ###"))pp</small></h4>
+                            <a class="button" style="width:100%;line-height: 20px !important;margin-bottom: 20px;background: #F15F29;" href="@Url.Content(string.Format("~/{0}-package/{1}", m.Category.Meta.Alias, m.Meta.Alias))">MAKE AN ENQUIRY</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <div style="height:80px;"></div>
+}
+<section id="content">
+    <div class="search-box-wrapper">
+        <div class="search-box container">
+            <div class="search-tab-content jpage-section">
+                <div class="pane fade active in" id="specialOffers" style="margin-top:30px;">
+                    <h2>@ViewBag.Category.Name</h2>
+                    <div class="row image-box style3" id="package_container">
+                        @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).OrderBy(x => x.Price))
+                        {
+                            <div class="col-sms-6 col-sm-6 col-md-3">
+                                <article class="box">
+                                    <figure class="" data-animation-type="fadeInDown" data-animation-delay="0">
+                                        @*<a href="ajax/cruise-slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="Package Image" src="@m.Image"></a>*@
+                                        <a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))" class="hover-effect"><img width="270" height="160" alt="@m.Name" src="@m.Image"></a>
+                                    </figure>
+                                    <div class="details text-center no">
+                                        <h4 class="box-title text-no-wrap">@m.Name</h4>
+                                        <p class="offers-content">@m.Category.Name</p>
+                                        <div class="stars-container" style="">
+                                            @if (m.Stars == 1)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="1 star" class="five-stars-container">
+                                                    <span style="width: 20%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 2)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="2 stars" class="five-stars-container">
+                                                    <span style="width: 40%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 3)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="3 stars" class="five-stars-container">
+                                                    <span style="width: 60%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 4)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="4 stars" class="five-stars-container">
+                                                    <span style="width: 80%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                            else if (m.Stars == 5)
+                                            {
+                                                <div data-placement="bottom" data-toggle="tooltip" title="5 stars" class="five-stars-container">
+                                                    <span style="width: 100%;" class="five-stars"></span>
+                                                </div>
+                                            }
+                                        </div>
+                                        <p class="description">From R @(m.Price)</p>
+                                        <a class="button" href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))">VIEW MORE</a>
+                                    </div>
+                                </article>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="text-align:center;">
+                        <div class="holder jpage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section parallax" data-stellar-background-ratio="0.5" style="background-position: 50% 37.5px;padding: 40px 0px 20px 0;background-color: rgb(245, 245, 245);">
+            <div class="container">
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInLeft" data-animation-type="slideInLeft" data-animation-delay="0" style="animation-duration: 1s; -webkit-animation-duration: 1s; visibility: visible;">
+                        <i class="soap-icon-features" style="font-size: 44px;"></i>
+                        <div class="description">
+                            <h4 class="box-title">On Promotion</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.IsOnPromotion).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInDown" data-animation-type="slideInDown" data-animation-delay="0.6" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 0.6s; -webkit-animation-delay: 0.6s; visibility: visible;">
+                        <i class="soap-icon-savings"></i>
+                        <div class="description">
+                            <h4 class="box-title">Below R10 000</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Price < 10000).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInDown" data-animation-type="slideInDown" data-animation-delay="0.9" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 0.9s; -webkit-animation-delay: 0.9s; visibility: visible;">
+                        <i class="soap-icon-plane"></i>
+                        <div class="description">
+                            <h4 class="box-title">Quick Getaways</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Nights <= 3).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="icon-box style6 animated slideInRight" data-animation-type="slideInRight" data-animation-delay="1.2" style="animation-duration: 1s; -webkit-animation-duration: 1s; animation-delay: 1.2s; -webkit-animation-delay: 1.2s; visibility: visible;">
+                        <i class="soap-icon-fireplace"></i>
+                        <div class="description">
+                            <h4 class="box-title">Luxury Stays</h4>
+                            <ul class="triangle hover">
+                                @foreach (var m in ((IEnumerable<dynamic>)(ViewBag.Inventory)).Where(m => m.Stars >= 5).OrderBy(x => Guid.NewGuid()).Take(4))
+                                {
+                                    <li><a href="@Url.Content(string.Format("~/{0}-package/{1}", ViewBag.Category.Meta.Alias, m.Meta.Alias))"><h5 class="box-title">@m.Name<small><br /></small></h5></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</section>
